@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This code is distributed under The GNU Lesser General Public License (LGPLv3)
+  ~ Please visit GNU site for LGPLv3 http://www.gnu.org/copyleft/lesser.html
+  ~
+  ~ Copyright Denis Pavlov 2009
+  ~ Web: http://www.inspire-software.com
+  ~ SVN: https://geda-genericdto.svn.sourceforge.net/svnroot/geda-genericdto
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:geda="http://geda-genericdto.svn.sourceforge.net/svnroot/geda-genericdto/schema"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://geda-genericdto.svn.sourceforge.net/svnroot/geda-genericdto/schema
+                           http://geda-genericdto.svn.sourceforge.net/svnroot/geda-genericdto/schema/geda-spring-integration-annotation-2.1.1.xsd">
+
+
+    <!--
+        dto-factory must match the dtoFactory bean name. This is mandatory attribute.
+        dto-adapters-registrar must also match bean name. This is optional attribute.
+        All on-* are optional, and define even handlers to give you last minute tidy up hooks
+            for processing your DTO's and Entities.
+        use-bean-processor="true" defines the BeanPostProcessor method of Advice enrichment for GeDA
+     -->
+    <geda:annotation-driven dto-factory="dtoFactory"
+                            use-bean-preprocessor="true"/>
+
+
+    <!--
+        Standard factory, which is used for ALL your DTO/Entity implementations.
+        Judging from experience - you should not put entities in here, these should only be
+                                  created manually, or through converters invoking special methods
+                                  on your Entity. E.g. Order object might have Order.createOrderLine()
+                                  method. And you can use on-entity-assembly event handler to invoke
+                                  that.
+    -->
+    <bean id="dtoFactory" class="com.inspiresoftware.lib.dto.geda.impl.DTOFactoryImpl">
+        <constructor-arg>
+            <map>
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>
