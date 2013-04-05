@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<an:akomaNtoso xmlns:an="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD02"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD02 ../../Akoma/3.0/akomantoso30.xsd">
+    <an:bill contains="originalVersion">
+        <an:meta>
+            <an:identification xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD02"
+                source="#redattore">
+                <an:FRBRWork>
+                    <an:FRBRthis value=""/>
+                    <an:FRBRuri value="it/Ddl/2008-04-29/256"/>
+                    <an:FRBRdate date="2008-04-29" name="presentazione"/>
+                    <an:FRBRauthor href=""/>
+                    <an:FRBRcountry value="ita"/>
+                    <an:FRBRsubtype value="DDLPRES"/>
+                    <an:FRBRnumber value="256"/>
+                </an:FRBRWork>
+                <an:FRBRExpression>
+                    <an:FRBRthis value=""/>
+                    <an:FRBRuri value="it/Ddl/2008-04-29/256/ita@2008-04-29/main"/>
+                    <an:FRBRdate date="2008-04-29" name="presentazione"/>
+                    <an:FRBRauthor href=""/>
+                    <an:FRBRlanguage language="it"/>
+                </an:FRBRExpression>
+                <an:FRBRManifestation>
+                    <an:FRBRthis value=""/>
+                    <an:FRBRuri value="it/Ddl/2008-04-29/256/ita@2008-04-29/main.xml"/>
+                    <an:FRBRdate date="2008-04-29" name="presentazione"/>
+                    <an:FRBRauthor href="#redattore"/>
+                </an:FRBRManifestation>
+            </an:identification>
+            <an:workflow source="#redattore">
+                <an:step id="step1" date="2008-04-29" actor="#senato" outcome="Presentazione"/>
+            </an:workflow>
+            <an:references source="#redattore">
+                <an:TLCOrganization id="redattore"
+                    showAs="Servizio Informatica del Senato della Repubblica"
+                    href="/dati.senato.it/osr/Senato/Servizio Informatica"/>
+                <an:TLCOrganization id="senato" showAs="Senato della Repubblica"
+                    href="/dati.senato.it/osr/Senato"/>
+                <an:TLCOrganization id="camera" showAs="Camera dei Deputati"
+                    href="/dati.senato.it/osr/Camera"/>
+                <an:TLCRole id="d1e26a1327" href="http://dati.senato.it/osr/Senatore"
+                    showAs="Senatore"/>
+                <an:TLCPerson id="d1e26a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="AMATI"/>
+                <an:TLCPerson id="d1e28a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="ANDRIA"/>
+                <an:TLCPerson id="d1e30a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="ANTEZZA"/>
+                <an:TLCPerson id="d1e32a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="ARMATO"/>
+                <an:TLCPerson id="d1e34a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="BARBOLINI"/>
+                <an:TLCPerson id="d1e37a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="BASSOLI"/>
+                <an:TLCPerson id="d1e39a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="BERTUZZI"/>
+                <an:TLCPerson id="d1e41a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="BIANCHI"/>
+                <an:TLCPerson id="d1e43a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="BIONDELLI"/>
+                <an:TLCPerson id="d1e45a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="BLAZINA"/>
+                <an:TLCPerson id="d1e47a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="BONINO"/>
+                <an:TLCPerson id="d1e50a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="BOSONE"/>
+                <an:TLCPerson id="d1e52a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="BUBBICO"/>
+                <an:TLCPerson id="d1e54a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="CARLONI"/>
+                <an:TLCPerson id="d1e56a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="CAROFIGLIO"/>
+                <an:TLCPerson id="d1e58a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="CASSON"/>
+                <an:TLCPerson id="d1e60a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="CECCANTI"/>
+                <an:TLCPerson id="d1e63a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="CHIAROMONTE"/>
+                <an:TLCPerson id="d1e65a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="CHITI"/>
+                <an:TLCPerson id="d1e67a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="COSENTINO"/>
+                <an:TLCPerson id="d1e69a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="DEL VECCHIO"/>
+                <an:TLCPerson id="d1e71a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="DELLA MONICA"/>
+                <an:TLCPerson id="d1e73a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="DELLA SETA"/>
+                <an:TLCPerson id="d1e76a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="DI GIOVAN PAOLO"/>
+                <an:TLCPerson id="d1e78a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="DONAGGIO"/>
+                <an:TLCPerson id="d1e80a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="D’UBALDO"/>
+                <an:TLCPerson id="d1e82a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="FERRANTE"/>
+                <an:TLCPerson id="d1e84a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="Marco FILIPPI"/>
+                <an:TLCPerson id="d1e86a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="FIORONI"/>
+                <an:TLCPerson id="d1e89a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="FISTAROL"/>
+                <an:TLCPerson id="d1e91a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="FONTANA"/>
+                <an:TLCPerson id="d1e93a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="Vittoria FRANCO"/>
+                <an:TLCPerson id="d1e95a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="Mariapia GARAVAGLIA"/>
+                <an:TLCPerson id="d1e97a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="GHEDINI"/>
+                <an:TLCPerson id="d1e99a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="GIARETTA"/>
+                <an:TLCPerson id="d1e102a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="GRANAIOLA"/>
+                <an:TLCPerson id="d1e104a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="ICHINO"/>
+                <an:TLCPerson id="d1e106a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="LEGNINI"/>
+                <an:TLCPerson id="d1e108a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="LIVI BACCI"/>
+                <an:TLCPerson id="d1e110a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="MARCENARO"/>
+                <an:TLCPerson id="d1e112a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="MARINARO"/>
+                <an:TLCPerson id="d1e115a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="Ignazio MARINO"/>
+                <an:TLCPerson id="d1e117a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="Mauro Maria MARINO"/>
+                <an:TLCPerson id="d1e119a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="MICHELONI"/>
+                <an:TLCPerson id="d1e121a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="MILANA"/>
+                <an:TLCPerson id="d1e123a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="MOLINARI"/>
+                <an:TLCPerson id="d1e125a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="NEGRI"/>
+                <an:TLCPerson id="d1e128a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="NEROZZI"/>
+                <an:TLCPerson id="d1e130a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="PAPANIA"/>
+                <an:TLCPerson id="d1e132a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="PASSONI"/>
+                <an:TLCPerson id="d1e134a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="PEGORER"/>
+                <an:TLCPerson id="d1e136a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="PERDUCA"/>
+                <an:TLCPerson id="d1e138a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="PINOTTI"/>
+                <an:TLCPerson id="d1e141a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="PORETTI"/>
+                <an:TLCPerson id="d1e143a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="RANUCCI"/>
+                <an:TLCPerson id="d1e145a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="ROILO"/>
+                <an:TLCPerson id="d1e147a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="Paolo ROSSI"/>
+                <an:TLCPerson id="d1e149a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="RUSCONI"/>
+                <an:TLCPerson id="d1e151a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="SANGALLI"/>
+                <an:TLCPerson id="d1e154a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="SANNA"/>
+                <an:TLCPerson id="d1e156a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="SBARBATI"/>
+                <an:TLCPerson id="d1e158a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="SCANU"/>
+                <an:TLCPerson id="d1e160a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="Anna Maria SERAFINI"/>
+                <an:TLCPerson id="d1e162a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="SIRCANA"/>
+                <an:TLCPerson id="d1e164a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="SOLIANI"/>
+                <an:TLCPerson id="d1e167a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="STRADIOTTO"/>
+                <an:TLCPerson id="d1e169a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="VIMERCATI"/>
+                <an:TLCPerson id="d1e171a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="VITA"/>
+                <an:TLCPerson id="d1e173a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="VITALI"/>
+                <an:TLCPerson id="d1e175a1032" href="http://dati.senato.it/osr/Persona"
+                    showAs="ZAVOLI"/>
+            </an:references>
+        </an:meta>
+        <an:coverPage>
+            <an:p>SENATO DELLA REPUBBLICA</an:p>
+            <an:p>
+                <an:docType>DISEGNO DI LEGGE</an:docType>
+            </an:p>
+            <an:p>
+                <an:docNumber>256</an:docNumber>
+            </an:p>
+            <an:p>
+                <an:docTitle>Introduzione dell’articolo 593-bis del codice penale concernente il
+                    reato di tortura e altre norme in materia di tortura</an:docTitle>
+            </an:p>
+
+            <an:p> d’iniziativa dei senatori <an:docProponent refersTo="#d1e26a1032"
+                    as="#d1e26a1327">AMATI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e28a1032" as="#d1e26a1327">ANDRIA</an:docProponent>,
+                    <an:docProponent refersTo="#d1e30a1032" as="#d1e26a1327"
+                    >ANTEZZA</an:docProponent>, <an:docProponent refersTo="#d1e32a1032"
+                    as="#d1e26a1327">ARMATO</an:docProponent>, <an:docProponent
+                    refersTo="#d1e34a1032" as="#d1e26a1327">BARBOLINI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e37a1032" as="#d1e26a1327"
+                    >BASSOLI</an:docProponent>, <an:docProponent refersTo="#d1e39a1032"
+                    as="#d1e26a1327">BERTUZZI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e41a1032" as="#d1e26a1327">BIANCHI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e43a1032" as="#d1e26a1327"
+                    >BIONDELLI</an:docProponent>, <an:docProponent refersTo="#d1e45a1032"
+                    as="#d1e26a1327">BLAZINA</an:docProponent>, <an:docProponent
+                    refersTo="#d1e47a1032" as="#d1e26a1327">BONINO</an:docProponent>,
+                    <an:docProponent refersTo="#d1e50a1032" as="#d1e26a1327"
+                    >BOSONE</an:docProponent>, <an:docProponent refersTo="#d1e52a1032"
+                    as="#d1e26a1327">BUBBICO</an:docProponent>, <an:docProponent
+                    refersTo="#d1e54a1032" as="#d1e26a1327">CARLONI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e56a1032" as="#d1e26a1327"
+                    >CAROFIGLIO</an:docProponent>, <an:docProponent refersTo="#d1e58a1032"
+                    as="#d1e26a1327">CASSON</an:docProponent>, <an:docProponent
+                    refersTo="#d1e60a1032" as="#d1e26a1327">CECCANTI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e63a1032" as="#d1e26a1327"
+                    >CHIAROMONTE</an:docProponent>, <an:docProponent refersTo="#d1e65a1032"
+                    as="#d1e26a1327">CHITI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e67a1032" as="#d1e26a1327">COSENTINO</an:docProponent>,
+                    <an:docProponent refersTo="#d1e69a1032" as="#d1e26a1327">DEL
+                    VECCHIO</an:docProponent>, <an:docProponent refersTo="#d1e71a1032"
+                    as="#d1e26a1327">DELLA MONICA</an:docProponent>, <an:docProponent
+                    refersTo="#d1e73a1032" as="#d1e26a1327">DELLA SETA</an:docProponent>,
+                    <an:docProponent refersTo="#d1e76a1032" as="#d1e26a1327">DI GIOVAN
+                    PAOLO</an:docProponent>, <an:docProponent refersTo="#d1e78a1032"
+                    as="#d1e26a1327">DONAGGIO</an:docProponent>, <an:docProponent
+                    refersTo="#d1e80a1032" as="#d1e26a1327">D’UBALDO</an:docProponent>,
+                    <an:docProponent refersTo="#d1e82a1032" as="#d1e26a1327"
+                    >FERRANTE</an:docProponent>, <an:docProponent refersTo="#d1e84a1032"
+                    as="#d1e26a1327">Marco FILIPPI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e86a1032" as="#d1e26a1327">FIORONI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e89a1032" as="#d1e26a1327"
+                    >FISTAROL</an:docProponent>, <an:docProponent refersTo="#d1e91a1032"
+                    as="#d1e26a1327">FONTANA</an:docProponent>, <an:docProponent
+                    refersTo="#d1e93a1032" as="#d1e26a1327">Vittoria FRANCO</an:docProponent>,
+                    <an:docProponent refersTo="#d1e95a1032" as="#d1e26a1327">Mariapia
+                    GARAVAGLIA</an:docProponent>, <an:docProponent refersTo="#d1e97a1032"
+                    as="#d1e26a1327">GHEDINI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e99a1032" as="#d1e26a1327">GIARETTA</an:docProponent>,
+                    <an:docProponent refersTo="#d1e102a1032" as="#d1e26a1327"
+                    >GRANAIOLA</an:docProponent>, <an:docProponent refersTo="#d1e104a1032"
+                    as="#d1e26a1327">ICHINO</an:docProponent>, <an:docProponent
+                    refersTo="#d1e106a1032" as="#d1e26a1327">LEGNINI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e108a1032" as="#d1e26a1327">LIVI
+                    BACCI</an:docProponent>, <an:docProponent refersTo="#d1e110a1032"
+                    as="#d1e26a1327">MARCENARO</an:docProponent>, <an:docProponent
+                    refersTo="#d1e112a1032" as="#d1e26a1327">MARINARO</an:docProponent>,
+                    <an:docProponent refersTo="#d1e115a1032" as="#d1e26a1327">Ignazio
+                    MARINO</an:docProponent>, <an:docProponent refersTo="#d1e117a1032"
+                    as="#d1e26a1327">Mauro Maria MARINO</an:docProponent>, <an:docProponent
+                    refersTo="#d1e119a1032" as="#d1e26a1327">MICHELONI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e121a1032" as="#d1e26a1327"
+                    >MILANA</an:docProponent>, <an:docProponent refersTo="#d1e123a1032"
+                    as="#d1e26a1327">MOLINARI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e125a1032" as="#d1e26a1327">NEGRI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e128a1032" as="#d1e26a1327"
+                    >NEROZZI</an:docProponent>, <an:docProponent refersTo="#d1e130a1032"
+                    as="#d1e26a1327">PAPANIA</an:docProponent>, <an:docProponent
+                    refersTo="#d1e132a1032" as="#d1e26a1327">PASSONI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e134a1032" as="#d1e26a1327"
+                    >PEGORER</an:docProponent>, <an:docProponent refersTo="#d1e136a1032"
+                    as="#d1e26a1327">PERDUCA</an:docProponent>, <an:docProponent
+                    refersTo="#d1e138a1032" as="#d1e26a1327">PINOTTI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e141a1032" as="#d1e26a1327"
+                    >PORETTI</an:docProponent>, <an:docProponent refersTo="#d1e143a1032"
+                    as="#d1e26a1327">RANUCCI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e145a1032" as="#d1e26a1327">ROILO</an:docProponent>,
+                    <an:docProponent refersTo="#d1e147a1032" as="#d1e26a1327">Paolo
+                    ROSSI</an:docProponent>, <an:docProponent refersTo="#d1e149a1032"
+                    as="#d1e26a1327">RUSCONI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e151a1032" as="#d1e26a1327">SANGALLI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e154a1032" as="#d1e26a1327"
+                    >SANNA</an:docProponent>, <an:docProponent refersTo="#d1e156a1032"
+                    as="#d1e26a1327">SBARBATI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e158a1032" as="#d1e26a1327">SCANU</an:docProponent>,
+                    <an:docProponent refersTo="#d1e160a1032" as="#d1e26a1327">Anna Maria
+                    SERAFINI</an:docProponent>, <an:docProponent refersTo="#d1e162a1032"
+                    as="#d1e26a1327">SIRCANA</an:docProponent>, <an:docProponent
+                    refersTo="#d1e164a1032" as="#d1e26a1327">SOLIANI</an:docProponent>,
+                    <an:docProponent refersTo="#d1e167a1032" as="#d1e26a1327"
+                    >STRADIOTTO</an:docProponent>, <an:docProponent refersTo="#d1e169a1032"
+                    as="#d1e26a1327">VIMERCATI</an:docProponent>, <an:docProponent
+                    refersTo="#d1e171a1032" as="#d1e26a1327">VITA</an:docProponent>,
+                    <an:docProponent refersTo="#d1e173a1032" as="#d1e26a1327"
+                    >VITALI</an:docProponent> e <an:docProponent refersTo="#d1e175a1032"
+                    as="#d1e26a1327">ZAVOLI</an:docProponent>
+            </an:p>
+            <an:p>COMUNICATO ALLA PRESIDENZA IL 29 APRILE 2008</an:p>
+
+        </an:coverPage>
+        <an:body title="DISEGNO DI LEGGE">
+
+            <an:article id="d1e236">
+                <an:num>Art. 1.</an:num>
+                <an:paragraph id="d1e241">
+                    <an:num>1.</an:num>
+                    <an:content id="d1e246">
+                        <an:p>Dopo l’articolo 593 del codice penale è inserito il seguente:</an:p>
+                        <an:p>«Art. 593-bis. – <an:i>(Tortura)</an:i> – Il pubblico ufficiale o
+                            l’incaricato di pubblico servizio che infligge ad una persona, con
+                            qualsiasi atto, dolore o sofferenze, fisiche o mentali, al fine di
+                            ottenere segnatamente da essa o da una terza persona informazioni o
+                            confessioni, di punirla per un atto che essa o una terza persona ha
+                            commesso o è sospettata di aver commesso, di intimorirla o di far
+                            pressione su di lei o su di una terza persona, o per qualsiasi altro
+                            motivo fondato su ragioni di discriminazione, è punito con la reclusione
+                            da quattro a dieci anni.</an:p>
+                        <an:p>La pena è aumentata se ne deriva una lesione personale. È raddoppiata
+                            se ne deriva la morte.</an:p>
+                        <an:p>Alla stessa pena soggiace il pubblico ufficiale o l’incaricato di
+                            pubblico servizio che istiga altri alla commissione del fatto, o che si
+                            sottrae volontariamente all’impedimento del fatto, o che vi acconsente
+                            tacitamente».</an:p>
+                    </an:content>
+                </an:paragraph>
+            </an:article>
+            <an:article id="d1e266">
+                <an:num>Art. 2</an:num>
+                <an:paragraph id="d1e271">
+                    <an:num>1.</an:num>
+                    <an:content id="d1e276">
+                        <an:p>Il Governo italiano non può assicurare l’immunità diplomatica ai
+                            cittadini stranieri sottoposti a procedimento penale o condannati per il
+                            reato di tortura in un altro Paese o da un tribunale
+                            internazionale.</an:p>
+                    </an:content>
+                </an:paragraph>
+                <an:paragraph id="d1e283">
+                    <an:num>2.</an:num>
+                    <an:content id="d1e288">
+                        <an:p>Nei casi di cui al comma 1 il cittadino straniero è estradato verso lo
+                            Stato nel quale è in corso il procedimento penale o è stata pronunciata
+                            sentenza di condanna per il reato di tortura o, nel caso di procedimento
+                            davanti ad un tribunale internazionale, verso lo Stato individuato ai
+                            sensi della normativa internazionale relativa.</an:p>
+                    </an:content>
+                </an:paragraph>
+            </an:article>
+            <an:article id="d1e296">
+                <an:num>Art. 3</an:num>
+                <an:paragraph id="d1e301">
+                    <an:num>1.</an:num>
+                    <an:content id="d1e306">
+                        <an:p>È istituito presso la Presidenza del Consiglio dei ministri un fondo,
+                            con dotazione pari a 4,5 milioni di euro a decorrere dall’anno 2008, per
+                            le vittime dei reati di tortura per assicurare un risarcimento
+                            finalizzato ad una completa riabilitazione.</an:p>
+                    </an:content>
+                </an:paragraph>
+                <an:paragraph id="d1e313">
+                    <an:num>2.</an:num>
+                    <an:content id="d1e318">
+                        <an:p>In caso di morte della vittima, derivante dall’atto di tortura, gli
+                            eredi hanno diritto ad un equo risarcimento.</an:p>
+                    </an:content>
+                </an:paragraph>
+                <an:paragraph id="d1e325">
+                    <an:num>3.</an:num>
+                    <an:content id="d1e330">
+                        <an:p>È istituita, presso la Presidenza del Consiglio dei ministri, la
+                            Commissione per la riabilitazione delle vittime della tortura, di
+                            seguito denominata «Commissione», con il compito di gestire il fondo di
+                            cui al comma 1. La composizione e il funzionamento della Commissione
+                            sono disciplinati con decreto del Presidente del Consiglio dei
+                            ministri.</an:p>
+                    </an:content>
+                </an:paragraph>
+            </an:article>
+            <an:article id="d1e338">
+                <an:num>Art. 4</an:num>
+                <an:paragraph id="d1e343">
+                    <an:num>1. </an:num>
+                    <an:content id="d1e348">
+                        <an:p>All’onere derivante dalla presente legge, valutato in 5 milioni di
+                            euro per ciascuno degli anni 2008, 2009 e 2010, si provvede mediante
+                            corrispondente riduzione dello stanziamento iscritto, ai fini del
+                            bilancio triennale 2008-2010, nell’ambito del fondo speciale di parte
+                            corrente dello stato di previsione del Ministero dell’economia e delle
+                            finanze per l’anno 2008, allo scopo parzialmente utilizzando
+                            l’accantonamento relativo al medesimo Ministero.</an:p>
+                    </an:content>
+                </an:paragraph>
+                <an:paragraph id="d1e355">
+                    <an:num>2. </an:num>
+                    <an:content id="d1e360">
+                        <an:p>Il Ministro dell’economia e delle finanze è autorizzato ad apportare,
+                            con propri decreti, le occorrenti variazioni di bilancio.</an:p>
+                    </an:content>
+                </an:paragraph>
+            </an:article>
+        </an:body>
+        <an:attachments>
+            <an:doc name="Relazione">
+                <an:meta>
+                    <an:identification
+                        xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD02"
+                        source="#redattore">
+                        <an:FRBRWork>
+                            <an:FRBRthis value=""/>
+                            <an:FRBRuri value="it/Ddl/2008-04-29/256"/>
+                            <an:FRBRdate date="2008-04-29" name="presentazione"/>
+                            <an:FRBRauthor href=""/>
+                            <an:FRBRcountry value="ita"/>
+                            <an:FRBRsubtype value="allegato/RelPres"/>
+                            <an:FRBRnumber value="256"/>
+                        </an:FRBRWork>
+                        <an:FRBRExpression>
+                            <an:FRBRthis value=""/>
+                            <an:FRBRuri value="it/Ddl/2008-04-29/256/ita@2008-04-29/main"/>
+                            <an:FRBRdate date="2008-04-29" name="presentazione"/>
+                            <an:FRBRauthor href=""/>
+                            <an:FRBRlanguage language="it"/>
+                        </an:FRBRExpression>
+                        <an:FRBRManifestation>
+                            <an:FRBRthis value=""/>
+                            <an:FRBRuri value="it/Ddl/2008-04-29/256/ita@2008-04-29/main.xml"/>
+                            <an:FRBRdate date="2008-04-29" name="presentazione"/>
+                            <an:FRBRauthor href="#redattore"/>
+                        </an:FRBRManifestation>
+                    </an:identification>
+                </an:meta>
+                <an:mainBody>
+                    <an:p><an:span style="font-variant:small-caps;">Onorevoli Senatori.</an:span> –
+                        «È stato facile stabilire un primo punto fermo: cosa debba intendersi per
+                        tortura. Su questo punto ci soccorrevano la storia, gli scritti dei grandi
+                        illuministi (Verri, Beccaria, Voltaire, Manzoni), le letture recenti (ad
+                        esempio, La Question di Henri Alleg, sulla guerra di Algeria, o La
+                        Confessione di Arthur London, in cui il dirigente politico cecoslovacco
+                        descrive gli orribili metodi con cui i servizi di sicurezza del suo Paese
+                        torturavano i dissidenti politici negli anni cinquanta); ci sono state di
+                        grande aiuto anche le sentenze della Corte europea sui diritti dell’uomo (ad
+                        esempio quelle sulle cosiddette tecniche di aiuto all’interrogatorio, usate
+                        dagli inglesi nell’Irlanda del Nord), o il rapporto della Commissione
+                        europea sui diritti dell’uomo nella Grecia dei colonnelli.</an:p>
+                    <an:p>Senza nemmeno discuterne tra noi, ci è sembrato evidente che la tortura
+                        fosse qualunque violenza o coercizione, fisica o psichica, esercitata su una
+                        persona per estorcerle una confessione o informazioni, o per umiliarla,
+                        punirla o intimidirla. Nella tortura la disumanità è deliberata: una persona
+                        compie volontariamente contro un’altra atti che non solo feriscono
+                        quest’ultima nel corpo o nell’anima, ma ne offendono la dignità umana. Nella
+                        tortura c’è insomma l’intenzione di umiliare, offendere e degradare l’altro,
+                        di ridurlo a cosa. Così si esprimeva Antonio Cassese nelle sue memorie di
+                        Presidente del Comitato europeo per la prevenzione della tortura e delle
+                        pene o dei trattamenti inumani o degradanti.</an:p>
+                    <an:p>La tortura, così come il genocidio, è considerata crimine contro l’umanità
+                        dal diritto internazionale. La proibizione della tortura e di altre forme di
+                        trattamento o punizione crudele, inumana o degradante costituisce oggetto di
+                        molteplici Convenzioni internazionali ratificate anche dal nostro Paese. La
+                        Convenzione ONU approvata dall’Assemblea generale il 10 dicembre 1984 e
+                        ratificata dall’Italia ai sensi della legge 3 novembre 1988, n. 498,
+                        all’articolo 1 definisce il crimine della tortura come qualsiasi atto
+                        mediante il quale sono intenzionalmente inflitti ad una persona dolore o
+                        sofferenze, fisiche o mentali, con l’intenzione di ottenere dalla persona
+                        stessa o da un terzo una confessione o un’informazione, di punirla per un
+                        atto che lei o un’altra persona ha commesso o è sospettata di aver commesso,
+                        di intimorire o costringere la persona o un terzo, o per qualsiasi altro
+                        motivo fondato su qualsiasi altra forma di discriminazione, qualora tale
+                        dolore o sofferenza siano inflitte da un pubblico ufficiale o da ogni altra
+                        persona che agisca a titolo ufficiale, o su sua istigazione, o con il suo
+                        consenso espresso o tacito. All’articolo 4 si prevede che ogni Stato-parte
+                        vigili affinché tutti gli atti di tortura vengano considerati quali
+                        trasgressioni nei confronti del proprio diritto penale. Lo stesso vale per
+                        il tentativo di praticare la tortura.</an:p>
+                    <an:p>Nasce così un obbligo giuridico internazionale ad oggi inadempiuto dal
+                        nostro Paese, ossia l’introduzione del reato di tortura nel codice penale,
+                        più volte sollecitato sia dal Comitato sui diritti umani istituito dal Patto
+                        sui diritti civili e politici, sia dal Comitato istituito dalla Convenzione
+                        europea per la prevenzione della tortura, adottata a Strasburgo il 26
+                        novembre 1987, di cui alla legge 2 gennaio 1989, n. 7, il quale nell’esame
+                        dei due rapporti periodici sull’Italia ha sottolineato come fosse necessario
+                        supplire a tale lacuna normativa.</an:p>
+                    <an:p>La proibizione della tortura è anche esplicitamente prevista all’articolo
+                        3 della Convenzione europea per la salvaguardia dei diritti dell’uomo e
+                        delle libertà fondamentali, firmata a Roma il 4 novembre 1950, di cui alla
+                        legge 4 agosto 1955, n. 848, ed all’articolo 7 del Patto internazionale
+                        relativo ai diritti civili e politici adottato a New York il 19 dicembre
+                        1966, di cui alla legge 25 ottobre 1977, n. 881.</an:p>
+                    <an:p>In sede europea dal 1989 opera, a seguito della citata Convenzione di
+                        Strasburgo, il predetto Comitato per la prevenzione della tortura e delle
+                        pene o trattamenti inumani o degradanti, le cui visite periodiche nelle
+                        carceri e nelle stazioni di polizia dei Paesi firmatari la Convenzione
+                        costituiscono il più efficace deterrente contro ogni tentazione di
+                        violazione dei diritti fondamentali delle persone private della libertà
+                        personale.</an:p>
+                    <an:p>Per chiudere il quadro internazionale di riferimento, esiste anche una
+                        Convenzione interamericana contro la tortura, mentre la Carta africana la
+                        proibisce espressamente.</an:p>
+                    <an:p>La esplicita previsione del reato di tortura, oltre a corrispondere ad un
+                        obbligo giuridico internazionale, costituisce un forte messaggio simbolico
+                        in chiave preventiva. Significa chiarire con nettezza quali sono i limiti
+                        dell’esercizio della forza e quali sono i limiti dell’esercizio dei pubblici
+                        poteri rispetto ad esigenze investigative o di polizia.</an:p>
+                    <an:p>Alcune questioni devono essere preliminarmente affrontate per meglio
+                        chiarire l’ambito di azione di un disegno di legge che intende introdurre il
+                        reato di tortura nel nostro ordinamento penale. È difficile esplicitare
+                        esaustivamente il contenuto del reato di tortura. Proprio per evitare
+                        operazioni ermeneutiche che ne ridimensionino la portata, è necessario
+                        procedere ad una elencazione casistica, seppur non omnicomprensiva, delle
+                        fattispecie che possono essere configurate quali episodi di tortura. Una
+                        prima distinzione è fra forme di tortura fisica (pestaggi sistematici e non,
+                        molestie sessuali, shock elettrici, torture con gettiti di acqua,
+                        mutilazioni) e forme di tortura psicologica (ingiurie verbali, minacce di
+                        morte, costrizione alla nudità integrale, costrizione ad assistere alla
+                        tortura o alla morte di altri detenuti, minacce trasversali, ispezioni
+                        improvvise e senza mandato, sorveglianza continua durante l’espletamento di
+                        attività lavorativa, perdita del lavoro o della possibilità di continuare
+                        gli studi al termine del periodo di detenzione). Questa prima elencazione,
+                        frutto di un’analisi della giurisprudenza internazionale, evidenzia come la
+                        tortura possa essere non solo inflizione di sofferenza fisica ma anche di
+                        sofferenza psicologica. E nel nostro ordinamento oggi è certamente
+                        insufficiente la mera previsione del reato di minaccia di cui all’articolo
+                        612 del codice penale. La definizione di tortura presente all’interno della
+                        stessa Convenzione ONU, essendo ripresa nel disegno di legge, richiede
+                        alcuni chiarimenti. Essa è primariamente intesa a tutelare i detenuti, ossia
+                        le persone in stato di detenzione legale. Destinatario del crimine di
+                        tortura è anche colui che si trova in uno stato di detenzione illegale o di
+                        fatto (ad esempio ricovero forzato in un ospedale psichiatrico). In tal
+                        senso si è espresso il Comitato sui diritti umani, che ha interpretato la
+                        proibizione della tortura prevista al citato articolo 7 del Patto sui
+                        diritti civili e politici quale strumento di protezione non solo delle
+                        persone condannate o arrestate, ma anche degli allievi nelle scuole e dei
+                        malati negli ospedali. Ogni definizione di tortura, pertanto, non deve
+                        essere confinata alle sole ipotesi di violenze nei luoghi di detenzione. In
+                        prospettiva è quindi auspicabile che l’ambito applicativo si estenda sino a
+                        ricomprendere episodi di violenza sessuale posti in essere da pubblici
+                        ufficiali o di lavoro forzato a danno di minori. Il concetto di tortura deve
+                        essere riempito di contenuti dettati dalle circostanze politiche e dal
+                        momento storico.</an:p>
+                    <an:p>Altra questione riguarda l’autore del reato. Non è necessario che il
+                        pubblico ufficiale sia autore diretto della tortura; è sufficiente che ne
+                        sia istigatore, complice consenziente o mero soggetto acquiesciente alla
+                        commissione del crimine. Pertanto un cittadino comune utilizzato o impiegato
+                        da un pubblico ufficiale per commettere violenza fisica o psicologica nei
+                        confronti di un altro cittadino, in stato di detenzione o non, per le
+                        finalità descritte con precisione nella norma, commette il reato di tortura.
+                        Vi deve essere un nesso di causalità diretto tra l’istigazione e l’atto
+                        compiuto; nesso che non viene meno nei casi in cui il privato cittadino vada
+                        oltre il mandato conferitogli. Deve rispondere di tortura anche il pubblico
+                        ufficiale tacitamente consenziente alla commissione di atti di tortura
+                        compiuti da soggetti privati o che si sottrae volontariamente all’obbligo di
+                        impedire un atto di tortura. La rielaborazione della nozione di tortura deve
+                        spingersi sino a ricomprendere tutte quelle ipotesi in cui gruppi
+                        para-legali (ad esempio «squadroni della morte» o gruppi armati non dello
+                        Stato) fruiscono dell’incoraggiamento, anche indiretto, dello Stato per
+                        intraprendere azioni dirette a sopprimere gli oppositori politici. Deve
+                        essere tenuto in debito conto, inoltre, il ruolo che il sesso ed il genere
+                        possono giocare nella identificazione degli atti di tortura. Non può essere
+                        tralasciato come ben diversi siano i rischi a cui una donna è soggetta
+                        durante un interrogatorio rispetto ad un uomo, così come differenti sono le
+                        condizioni di detenzione perché si configuri un trattamento non rispettoso
+                        della dignità della persona. Infine, la tortura non include, ovviamente, le
+                        sofferenze derivanti dall’applicazione di una sanzione legale o ad essa
+                        inerente o accessoria.</an:p>
+                    <an:p>Per tutte queste ragioni è importante prevedere l’introduzione del reato
+                        di tortura nel nostro codice penale. Non possono essere ritenuti sufficienti
+                        gli articoli 606 (arresto illegale), 607 (indebita limitazione di libertà
+                        personale), 608 (abuso di autorità contro arrestati o detenuti), 609
+                        (perquisizione e ispezione personali arbitrarie) del codice penale, sia per
+                        la non severità della sanzione, sia per la non incisività del contenuto.
+                        Dall’altro lato, nei reati di percosse (articolo 581 del codice penale) e di
+                        lesione personale (articolo 582 del codice penale) manca la specificità
+                        dell’elemento soggettivo, tipico, invece, della tortura.</an:p>
+                    <an:p>L’introduzione del reato di tortura costituisce, quindi, un adeguamento
+                        della normativa interna a quella sovranazionale, colma le lacune del diritto
+                        interno (gli atti di tortura che non provocano lesioni gravi sono oggi
+                        punibili solo a querela di parte e rischiano quindi l’impunità, così come le
+                        sottili torture psicologiche non rientranti nel novero delle lesioni
+                        personali), costituisce norma di chiusura dell’ordinamento a garanzia dei
+                        diritti umani di tutti i cittadini. Il disegno di legge, che introduce il
+                        reato di tortura nel codice penale nell’ambito dei delitti contro la persona
+                        (e precisamente a chiusura del capo concernente i delitti contro la vita e
+                        l’incolumità individuale), prevede la procedibilità di ufficio, pene
+                        particolarmente severe visto che si attenta ai diritti umani fondamentali,
+                        obbligo di negare l’immunità diplomatica a chiunque si sia macchiato di
+                        reati di tortura anche all’estero, l’istituzione di un fondo ad hoc per la
+                        riabilitazione delle vittime della tortura.</an:p>
+                </an:mainBody>
+            </an:doc>
+        </an:attachments>
+    </an:bill>
+</an:akomaNtoso>

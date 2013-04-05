@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns="http://www.akomantoso.org/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.akomantoso.org/2.0 H:\MYDOCU~1\LEOSPR~1\AKNSCH~1\testing\akomantoso20.xsd">
+	<!-- This sample document features simplified metadata in order to concentrate on the structure elements - metadata to be fully implemented in a later stage-->
+	<documentCollection name="COMProposal">
+		<meta>
+			<identification source="digit legiswrite support">
+				<FRBRWork>
+					<FRBRthis value="urn:lex:eu:commission:proposal:2010:372"/>
+					<FRBRuri value="urn:lex:eu:commission:proposal:2010:372"/>
+					<FRBRdate name="referingCOMAdoptedDate" date="2010-07-02"/>
+					<FRBRauthor href="#COM"/>
+				</FRBRWork>
+				<FRBRExpression>
+					<FRBRthis value="urn:lex:eu:commission:proposal:2010:372@final:en"/>
+					<FRBRuri value="urn:lex:eu:commission:proposal:2010:372@final:en"/>
+					<FRBRdate name="referingCOMAdoptedDate" date="2010-07-02"/>
+					<FRBRauthor href="#COM"/>
+				</FRBRExpression>
+				<FRBRManifestation>
+					<FRBRthis value="urn:lex:eu:commission:proposal:2010:372@final:en$text-xml"/>
+					<FRBRuri value="urn:lex:eu:commission:proposal:2010:372@final:en$text-xml"/>
+					<FRBRdate name="sample document" date="2012-09-25"/>
+					<FRBRauthor href="#petitpp"/>
+				</FRBRManifestation>
+			</identification>
+		</meta>
+		<preface>
+			<p class="enactingDate">
+				<location id="city1" refersTo="#BXL">Brussels</location>, <docDate date="2010-07-20">20.7.2010</docDate>
+			</p>
+			<p class="docRef">
+				<docNumber refersTo="id1">COM(2010) 372</docNumber> final</p>
+			<longTitle id="pre-lgt">
+				<p>
+					<docStatus>Proposal</docStatus> for a </p>
+				<p>
+					<docProponent refersTo="#CSL">COUNCIL</docProponent>
+					<docType>REGULATION</docType>
+				</p>
+				<p>
+					<docTitle>on State aid to facilitate the closure of uncompetitive coal mines</docTitle>
+				</p>
+			</longTitle>
+			<!--			following two lines need to be discussed : class is normally used for formatting not for metadata
+-->
+			<p class="WorkingDoc">{SEC(2010) 850}</p>
+			<p class="WorkingDoc">{SEC(2010) 851}</p>
+		</preface>
+		<collectionContent/>
+	</documentCollection>
+	<components>
+		<component id="expmo">
+			<doc name="explanatory memorandum">
+				<meta>
+					<identification source="digit legiswrite support">
+						<FRBRWork>
+							<FRBRthis value="test"/>
+							<FRBRuri value="test"/>
+							<FRBRdate name="test" date="2010-07-02"/>
+							<FRBRauthor href="#COM"/>
+						</FRBRWork>
+						<FRBRExpression>
+							<FRBRthis value="test"/>
+							<FRBRuri value="test"/>
+							<FRBRdate name="test" date="2010-07-02"/>
+							<FRBRauthor href="#COM"/>
+						</FRBRExpression>
+						<FRBRManifestation>
+							<FRBRthis value="test"/>
+							<FRBRuri value="test"/>
+							<FRBRdate name="test" date="2010-07-02"/>
+							<FRBRauthor href="#COM"/>
+						</FRBRManifestation>
+					</identification>
+				</meta>
+				<preface>
+					<longTitle id="pre-lgt_expmo">
+						<p>EXPLANATORY MEMORANDUM</p>
+					</longTitle>
+				</preface>
+				<mainContent>
+					<tblock id="tbk1_expmo">
+						<num>1.</num>
+						<heading>CONTEXT OF THE PROPOSAL</heading>
+						<p>Aid to the EU hard coal industry is regulated by …</p>
+					</tblock>
+				</mainContent>
+			</doc>
+		</component>
+		<component id="bill">
+			<bill>
+				<meta>
+					<identification source="digit legiswrite support">
+						<FRBRWork>
+							<FRBRthis value="test"/>
+							<FRBRuri value="test"/>
+							<FRBRdate name="test" date="2010-07-02"/>
+							<FRBRauthor href="#COM"/>
+						</FRBRWork>
+						<FRBRExpression>
+							<FRBRthis value="test"/>
+							<FRBRuri value="test"/>
+							<FRBRdate name="test" date="2010-07-02"/>
+							<FRBRauthor href="#COM"/>
+						</FRBRExpression>
+						<FRBRManifestation>
+							<FRBRthis value="test"/>
+							<FRBRuri value="test"/>
+							<FRBRdate name="test" date="2010-07-02"/>
+							<FRBRauthor href="#COM"/>
+						</FRBRManifestation>
+					</identification>
+				</meta>
+				<preface>
+					<longTitle id="pre-lgt_bill">
+						<p>
+							<docStatus>Proposal</docStatus> for a </p>
+						<p>
+							<docProponent refersTo="#CSL">COUNCIL</docProponent>
+							<docType>REGULATION</docType>
+						</p>
+						<p>
+							<docTitle>on State aid to facilitate the closure of uncompetitive coal mines</docTitle>
+						</p>
+					</longTitle>
+				</preface>
+				<preamble>
+					<!--"institution qui agit" is a special style in LegisWrite and could be considered as a metadata
+-->
+					<p>THE COUNCIL OF THE EUROPEAN UNION,</p>
+					<citations>
+						<citation id="cit1">
+							<p>Having regard to the Treaty on the Functioning of the European Union, and in particular Article 107(3)(e) thereof,</p>
+						</citation>
+						<citation id="cit2">
+							<p>Having regard to the proposal from the European Commission,</p>
+						</citation>
+						<citation id="cit3">
+							<p>Having regard to … </p>
+						</citation>
+					</citations>
+					<recitals>
+						<intro>
+							<p>Whereas:</p>
+						</intro>
+						<recital id="rec1">
+							<num>(1)</num>
+							<p>Council Regulation (EC) No 1407/2002  of 23 July 2002 on State aid to the coal industry expires on 31 December 2010. 
+</p>
+						</recital>
+						<recital id="rec2">
+							<num>(2)</num>
+							<p>The small contribution of subsidised coal to …</p>
+						</recital>
+						<recital id="rec3">
+							<num>(3)</num>
+							<p>…</p>
+						</recital>
+					</recitals>
+					<p>HAS ADOPTED THIS REGULATION:</p>
+				</preamble>
+				<body>
+					<section id="sect1">
+						<num>SECTION I</num>
+						<heading>INTRODUCTORY PROVISIONS</heading>
+						<article id="art1">
+							<num>Article 1</num>
+							<heading>Definitions</heading>
+							<list id="art1-lst1">
+								<intro>
+									<p>For the purposes of this Regulation, the following definitions shall apply:</p>
+								</intro>
+								<point id="art1-lst1-pnta">
+									<num>(a)</num>
+									<content>
+										<p>"coal" means ...</p>
+									</content>
+								</point>
+								<point id="art1-lst1-pntb">
+									<num>(b)</num>
+									<content>
+										<p>"closure" means…</p>
+									</content>
+								</point>
+								<point id="art1-lst1-pntc">
+									<num>(c)</num>
+									<content>
+										<p>...</p>
+									</content>
+								</point>
+							</list>
+						</article>
+					</section>
+					<section id="sect2">
+						<num>SECTION II</num>
+						<heading>COMPATIBILITY OF AID</heading>
+						<article id="art2">
+							<num>Article 2</num>
+							<heading>Principle</heading>
+							<paragraph id="art2-par1">
+								<num>1.</num>
+								<content>
+									<p>In the context of …</p>
+								</content>
+							</paragraph>
+							<paragraph id="art2-par2">
+								<num>2.</num>
+								<content>
+									<p>Aid shall cover only costs …</p>
+								</content>
+							</paragraph>
+						</article>
+						<article id="art3">
+							<num>Article 3</num>
+							<heading>Closure aid</heading>
+							<paragraph id="art3-par1">
+								<num>1.</num>
+								<content>
+									<p>Aid to an undertaking (…) may be considered compatible with the internal market only if it satisfies the following conditions:</p>
+								</content>
+							</paragraph>
+							<!--lst1 is depending of par1 : how to reflect this in akn ?
+-->
+							<list id="art3-lst1">
+								<point id="art3-lst1-pnta">
+									<num>(a)</num>
+									<content>
+										<p>the operation of the production units concerned must form part of a closure plan the deadline of which does not extend beyond 1 October 2014 ;</p>
+									</content>
+								</point>
+								<point id="art3-lst1-pntb">
+									<num>(b)</num>
+									<content>
+										<p>the production units concerned must be closed definitively …</p>
+									</content>
+								</point>
+							</list>
+							<paragraph id="art3-par2">
+								<num>2.</num>
+								<content>
+									<p>(…)</p>
+								</content>
+							</paragraph>
+						</article>
+						<article id="art4">
+							<num>Article 4</num>
+							<content>
+								<p>(...)</p>
+							</content>
+						</article>
+						<article id="art9">
+							<num>Article 9</num>
+							<heading>Entry into force</heading>
+							<paragraph id="art9-par1">
+								<num>1.</num>
+								<content>
+									<p>This Regulation shall enter into force on the 20th day following its publication in the Official Journal of the European Union. It shall apply from 1 January 2011.</p>
+								</content>
+							</paragraph>
+							<paragraph id="art9-par2">
+								<num>2.</num>
+								<content>
+									<p>This Regulation shall expire on 31 December 2026.</p>
+								</content>
+							</paragraph>
+							<!--"application directe" is a special style in LW and could be considered as a metadata
+-->
+							<paragraph id="application_directe">
+								<content>
+									<p>This Regulation shall be binding in its entirety and directly applicable in all Member States.</p>
+								</content>
+							</paragraph>
+						</article>
+					</section>
+				</body>
+				<conclusions>
+					<!--following lines have special styles in LW (metadata ?)
+-->
+					<p>Done at Brussels,</p>
+					<p>For the Council</p>
+					<p>The President</p>
+					<p>(...)</p>
+				</conclusions>
+			</bill>
+		</component>
+		<component id="annex1">
+			<doc name="Annex">
+				<meta>
+					<identification source="digit legiswrite support">
+						<FRBRWork>
+							<FRBRthis value="test"/>
+							<FRBRuri value="test"/>
+							<FRBRdate name="test" date="2010-07-02"/>
+							<FRBRauthor href="#COM"/>
+						</FRBRWork>
+						<FRBRExpression>
+							<FRBRthis value="test"/>
+							<FRBRuri value="test"/>
+							<FRBRdate name="test" date="2010-07-02"/>
+							<FRBRauthor href="#COM"/>
+						</FRBRExpression>
+						<FRBRManifestation>
+							<FRBRthis value="test"/>
+							<FRBRuri value="test"/>
+							<FRBRdate name="test" date="2010-07-02"/>
+							<FRBRauthor href="#COM"/>
+						</FRBRManifestation>
+					</identification>
+				</meta>
+				<preface>
+					<longTitle id="pre-lgt_annex1">
+						<p>ANNEX</p>
+					</longTitle>
+				</preface>
+				<mainContent>
+					<p>(...)</p>
+				</mainContent>
+			</doc>
+		</component>
+	</components>
+</akomaNtoso>

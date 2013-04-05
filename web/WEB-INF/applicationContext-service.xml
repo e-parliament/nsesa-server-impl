@@ -2,11 +2,25 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="documentService" class="org.nsesa.server.service.impl.DocumentServiceImpl"/>
+    <bean id="documentService" class="org.nsesa.server.service.impl.DocumentServiceImpl">
+        <property name="documents">
+            <map>
+                <entry key="1" value="classpath:examples/DDLPRES_256.akn"/>
+                <entry key="2" value="classpath:examples/Act_Kenya_1980-01-01@1989-12-15.xml"/>
+                <entry key="3" value="classpath:examples/Act_Kenya_1989-12-06.xml"/>
+                <entry key="4" value="classpath:examples/AmendmentList_Bungeni_2010-10-28v1.xml"/>
+                <entry key="5" value="classpath:examples/Debate_Bungeni_2010-12-07.xml"/>
+                <entry key="6" value="classpath:examples/constitution_final-Kenya.xml"/>
+                <entry key="7" value="classpath:examples/Bill_southAfrica_2006-12-23.xml"/>
+                <entry key="8" value="classpath:examples/COM_COM(2012)0744_EN.xml"/>
+                <entry key="9" value="classpath:examples/COM_COM(2012)0744_FR.xml"/>
+                <entry key="10" value="classpath:examples/DDLPRES_3596.akn"/>
+                <entry key="11" value="classpath:examples/DDLPRES_3653.akn"/>
+            </map>
+        </property>
+    </bean>
     <bean id="personService" class="org.nsesa.server.service.impl.PersonServiceImpl"/>
     <bean id="amendmentService" class="org.nsesa.server.service.impl.AmendmentServiceImpl"/>
 

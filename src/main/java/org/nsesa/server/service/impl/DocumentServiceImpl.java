@@ -1,5 +1,6 @@
 package org.nsesa.server.service.impl;
 
+import com.google.common.io.Files;
 import com.inspiresoftware.lib.dto.geda.assembler.Assembler;
 import com.inspiresoftware.lib.dto.geda.assembler.DTOAssembler;
 import com.inspiresoftware.lib.dto.geda.assembler.dsl.impl.DefaultDSLRegistry;
@@ -9,13 +10,18 @@ import org.nsesa.server.dto.DocumentDTO;
 import org.nsesa.server.repository.DocumentRepository;
 import org.nsesa.server.service.api.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Date: 11/03/13 15:52
@@ -30,6 +36,8 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Autowired
     DocumentRepository documentRepository;
+
+    Map<String, Resource> documents;
 
     final Assembler documentAssembler = DTOAssembler.newAssembler(DocumentDTO.class, Document.class);
 
@@ -62,6 +70,20 @@ public class DocumentServiceImpl implements DocumentService {
         DocumentDTO documentDTO = new DocumentDTO();
         documentAssembler.assembleDto(documentDTO, document, getConvertors(), new DefaultDSLRegistry());
         return documentDTO;
+    }
+
+    @GET
+    @Path("/content/{documentID}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Override
+    public String getDocumentContent(@PathParam("documentID") String documentID) {
+        Resource documentResource = documents.get(documentID);
+        try {
+            return Files.toString(documentResource.getFile(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @POST
@@ -99,5 +121,11 @@ public class DocumentServiceImpl implements DocumentService {
 
     private Map<String, Object> getConvertors() {
         return new HashMap<String, Object>();
+    }
+
+    // Spring setter ---------------------
+
+    public void setDocuments(Map<String, Resource> documents) {
+        this.documents = documents;
     }
 }
