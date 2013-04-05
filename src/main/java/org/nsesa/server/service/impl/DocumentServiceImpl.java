@@ -78,10 +78,12 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public String getDocumentContent(@PathParam("documentID") String documentID) {
         Resource documentResource = documents.get(documentID);
-        try {
-            return Files.toString(documentResource.getFile(), Charset.forName("UTF-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (documentResource != null) {
+            try {
+                return Files.toString(documentResource.getFile(), Charset.forName("UTF-8"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
