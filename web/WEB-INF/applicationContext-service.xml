@@ -18,6 +18,10 @@
                 <entry key="9" value="classpath:examples/COM_COM(2012)0744_FR.xml"/>
                 <entry key="10" value="classpath:examples/DDLPRES_3596.akn"/>
                 <entry key="11" value="classpath:examples/DDLPRES_3653.akn"/>
+                <entry key="12" value="classpath:examples/PE486.060_explanatory_v1-00.xml"/>
+                <entry key="13" value="classpath:examples/PE486.060_report_v2-00.xml"/>
+                <entry key="14" value="classpath:examples/PE486.060_resolution_v1-00.xml"/>
+                <entry key="template-1" value="classpath:examples/drafting_template.xml"/>
             </map>
         </property>
     </bean>

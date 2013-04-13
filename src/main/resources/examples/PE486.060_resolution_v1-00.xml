@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.akomantoso.org/2.0 ../schema/akomantoso20-20120722.xsd http://europarl.europa.eu/xml4ep/1.0 ../schema/ep-2-0.xsd"
+    xmlns="http://www.akomantoso.org/2.0" xmlns:ep="http://europarl.europa.eu/xml4ep/2.0">
+    
+<bill>
+    <meta>
+        <identification source="http://www.europarl.europa.eu/">
+            <FRBRWork>
+                <FRBRthis value="eu.europa.europarl:DIN1:(2012)0004860601"/>
+                <FRBRuri value=""/>
+                <FRBRdate date="2012-08-20" name="instantiation"/>
+                <FRBRauthor href=""/>
+                <FRBRcountry value="eu" />
+            </FRBRWork>
+            <FRBRExpression>
+                <FRBRthis value="eu.europa.europarl:DIN1:(2012)0004860601@01.00-en-01.00"/>
+                <FRBRuri value=""/>
+                <FRBRdate date="2012-08-20" name="instantiation"/>
+                <FRBRauthor href=""/>
+                <FRBRlanguage id="_1234" language="en"/>
+            </FRBRExpression>
+            <FRBRManifestation>
+                <FRBRthis value="eu.europa.europarl:DIN1:(2012)0004860601@01.00-en-01.00@text/xml"/>
+                <FRBRuri value=""/>
+                <FRBRdate date="2012-08-20" name="instantiation"/>
+                <FRBRauthor href=""/>
+            </FRBRManifestation>
+        </identification>
+        <analysis source="http://www.europarl.europa.eu/">
+            <otherAnalysis source="http://www.europarl.europa.eu/">
+                <ep:instanceInfo id="_80101">
+                    <ep:standalone id="_80102" value="false"/>
+                    <ep:docClass id="_80103" ep:category="xml4ep:/act/category/legislativeResolution" ep:stage="xml4ep:/doc/stage/draft">
+                        <ep:aspect id="_80104" ep:ref="xml4ep:/doc/aspect/position/positive"/>
+                    </ep:docClass>
+                    <ep:stakeholder id="_100" ep:role="xml4ep:/role/stakeholder/proponent">
+                        <ep:authority id="_8000" 
+                            ep:category="xml4ep:/authority/category/institution"
+                            ep:role="xml4ep:/role/doc/responsibleAuthority"
+                            ep:ref="eu.europa.europarl.codict:institution/id=27"/>
+                    </ep:stakeholder>
+                </ep:instanceInfo>
+                
+                <ep:targetInfo id="_12123">
+                    <ep:docClass id="_12124" ep:category="/act/category/regulation" ep:stage="xml4ep:/doc/stage/proposal"/>
+                    <ep:stakeholder id="_1998" ep:role="xml4ep:/role/stakeholder/proponent">
+                        <ep:authority id="_998"
+                            ep:category="xml4ep:/authority/category/institution"
+                            ep:role="xml4ep:/role/doc/responsibleAuthority"
+                            ep:ref="eu.europa.europarl.codict:institution/id=27"/>
+                        <ep:authority id="_999"
+                            ep:category="xml4ep:/authority/category/institution"
+                            ep:role="xml4ep:/role/doc/responsibleAuthority"
+                            ep:ref="eu.europa.europarl.codict:institution/id=11"/>
+                    </ep:stakeholder>
+                </ep:targetInfo>
+                
+                <ep:procedure id="_80150">
+                    <ep:procNumber id="_80151" 
+                        ep:year="2012" 
+                        ep:seq="19"
+                        ep:category="xml4ep:/procedure/type/COD"
+                        ep:nature="xml4ep:/procedure/nature/LE" 
+                        ep:reading="1"/>
+                    <ep:docClass id="_80155" ep:category="xml4ep:/act/category/regulation"/>
+                    <ep:audience id="_80152" ep:ref="xml4ep:/concept/doc/audience/committee"/>
+                    <ep:stakeholder id="_99" ep:role="xml4ep:/role/stakeholder/proponent">
+                        <ep:authority id="_80153" 
+                            ep:category="xml4ep:/authority/category/institution"
+                            ep:role="xml4ep:/role/procedure/initiativeRight"
+                            ep:ref="eu.europa.europarl.codict:institution/id=10"/>
+                    </ep:stakeholder>
+                </ep:procedure>
+                
+                <ep:otherRelations id="_80199">
+                    <ep:relatedDoc id="_80200" ep:tref="xml4ep:/doc/refType/baseDocument" href="..." />
+                    <ep:legalBase id="_80201" ep:tref="xml4ep:/concept/citation/EUtreaty/referral">
+                        <ep:relatedDoc id="_80202" ep:tref="xml4ep:/doc/refType/legalBase" href="..." />
+                    </ep:legalBase>
+                    <ep:legalBase id="_80203" ep:tref="xml4ep:/concept/citation/EUtreaty">
+                        <ep:relatedDoc id="_80204" ep:tref="xml4ep:/doc/refType/legalBase" href="..." />
+                    </ep:legalBase>
+                    <ep:legalBase id="_80205" ep:tref="xml4ep:/concept/citation/RoP">
+                        <ep:relatedDoc id="_80206" ep:tref="xml4ep:/doc/refType/legalBase" href="..." />
+                    </ep:legalBase>
+                </ep:otherRelations>
+                
+            </otherAnalysis>
+        </analysis>
+    </meta>
+            
+    <preface>
+        <container id="_7001" name="mainDoc">
+            <p><docTitle><docType refersTo="~_85082" ep:toc="true" ep:class="DEFAULT_UC">DRAFT EUROPEAN PARLIAMENT LEGISLATIVE RESOLUTION</docType><docPurpose>on the proposal for a regulation of the European Parliament and of the Council amending Council Regulation (EC) No 1225/2009 of <date date="2009-11-30">30 November 2009</date> on protection against dumped imports from countries not members of the European Community</docPurpose></docTitle></p>
+        </container>
+        <container id="_7006" name="relatedProc" refersTo="~_80150">
+            <p>(<docNumber ep:tref="xml4ep:/doc/idSchema/COMnumber">COM(2012)0041</docNumber> - <docNumber ep:tref="xml4ep:/doc/idSchema/sessionNumber">C7-0030/2012</docNumber> - <docketNumber refersTo="~_80151">2012/0019(COD)</docketNumber>)</p>
+            <p>(<process id="_7007" refersTo="~_80151">Ordinary legislative procedure: first reading</process>)</p>
+        </container>
+    </preface>
+ 
+    <preamble>
+        <formula id="_8900" refersTo="~_100"><p>The European Parliament,</p></formula>
+        <citations id="_8999">
+            <citation id="_9000" ep:tref="xml4ep:/concept/citation/proposal">
+                <p>having regard to the Commission proposal to Parliament and the Council (<docNumber ep:tref="xml4ep:/doc/idSchema/COMnumber">COM(2012)0041</docNumber>),</p>
+            </citation>
+            <citation id="_9001" refersTo="~_80201">
+                <p>having regard to Article <inline name="articleNumber">294(2)</inline> and Article <inline name="articleNumber">207</inline> of the Treaty on the Functioning of the European Union, pursuant to which the Commission submitted the proposal to Parliament (C7-0030/2012),</p>
+            </citation>
+            <citation id="_9002" refersTo="~_80203">
+                <p>having regard to Article <inline name="articleNumber">294(3)</inline> of the Treaty on the Functioning of the European Union,</p>
+            </citation>
+            <citation id="_9005" refersTo="~_80205">
+                <p>having regard to Rules <inline name="articleNumber">55</inline> and <inline name="articleNumber">46(1)</inline> of its Rules of Procedure,</p>
+            </citation>
+            <citation id="_9007" ep:tref="xml4ep:/concept/citation/sessionDoc">
+                <p>having regard to the report of the Committee on International Trade (A7-0000/2012),</p>
+            </citation>
+        </citations>
+    </preamble> 
+
+    <body>
+        <paragraph id="_9101" refersTo="~_80104">
+            <num>1.</num>
+            <content><p>Adopts its position at first reading, taking over the Commission proposal;</p></content>
+        </paragraph>
+        <paragraph id="_9102" ep:tref="xml4ep:/concept/LR/paragraph/reconsult">
+            <num>2.</num>
+            <content><p>Calls on the Commission to refer the matter to Parliament again if it intends to amend its proposal substantially or replace it with another text;</p></content>
+        </paragraph>
+        <paragraph id="_9103" ep:tref="xml4ep:/concept/LR/paragraph/forward">
+            <num>3.</num>
+            <content><p>Instructs its President to forward its position to the Council, the Commission and the national parliaments.</p></content>
+        </paragraph>
+    </body>
+</bill>
+</akomaNtoso>

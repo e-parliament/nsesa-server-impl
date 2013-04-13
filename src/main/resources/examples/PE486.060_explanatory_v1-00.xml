@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.akomantoso.org/2.0 ../schema/akomantoso20-20120722.xsd http://europarl.europa.eu/xml4ep/2.0 ../schema/ep-2-0.xsd"
+    xmlns="http://www.akomantoso.org/2.0" xmlns:ep="http://europarl.europa.eu/xml4ep/2.0">
+    
+<doc name="ReportExplanatoryStatement">
+    <meta>
+        <identification source="http://www.europarl.europa.eu/">
+            <FRBRWork>
+                <FRBRthis value="eu.europa.europarl:ICI1:(2012)0004860602"/>
+                <FRBRuri value=""/>
+                <FRBRdate date="2012-08-08" name="instantiation"/>
+                <FRBRauthor href=""/>
+                <FRBRcountry value="eu" />
+            </FRBRWork>
+            <FRBRExpression>
+                <FRBRthis value="eu.europa.europarl:ICI1:(2012)0004860602@01.00-en-01.00"/>
+                <FRBRuri value=""/>
+                <FRBRdate date="2012-08-08" name="instantiation"/>
+                <FRBRauthor href=""/>
+                <FRBRlanguage id="_1234" language="en"/>
+            </FRBRExpression>
+            <FRBRManifestation>
+                <FRBRthis value="eu.europa.europarl:ICI1:(2012)0004860602@01.00-en-01.00@text/xml"/>
+                <FRBRuri value=""/>
+                <FRBRdate date="2012-08-08" name="instantiation"/>
+                <FRBRauthor href=""/>
+            </FRBRManifestation>
+        </identification>
+        <analysis source="http://www.europarl.europa.eu/">
+            <otherAnalysis source="http://www.europarl.europa.eu/">
+                    <ep:instanceInfo id="_80101">
+                        <ep:standalone id="_80102" value="false"/>
+                        <ep:docClass id="_80103" ep:category="xml4ep:/doc/category/reportExplanatoryStatement" />
+                        <ep:stakeholder id="_100" ep:role="xml4ep:/role/stakeholder/proponent">
+                            <ep:authority id="_8000" 
+                                ep:category="xml4ep:/authority/category/institution"
+                                ep:role="xml4ep:/role/doc/responsibleAuthority"
+                                ep:ref="eu.europa.europarl.codict:institution/id=27"/>
+                        </ep:stakeholder>
+                    </ep:instanceInfo>
+            </otherAnalysis>
+        </analysis>
+    </meta>
+    <preface>
+        <container id="_7001" name="mainDoc">
+            <p><docTitle ep:toc="true">EXPLANATORY STATEMENT</docTitle></p> 
+        </container>
+    </preface>
+    <mainBody>
+        <p>On <date date="2011-07-28">28 July 2011</date>, the Dispute Settlement Body of the World Trade Organisation ('DSB') adopted the Appellate Body Report and the Panel Report as modified by the Appellate Body Report in the case 'European Communities — Definitive Anti-Dumping Measures on Certain Iron or Steel Fasteners from China'<authorialNote id="_9001" placement="bottom"><p>WTO, Report of the Appellate Body, AB-2011-2,</p>	
+                <p>WT/DS397/AB/R, 15 July 2011. WTO, Report of the Panel,</p>	
+                <p>WT/DS397/R, 29 September 2010. The reports can be downloaded from the WTO's website (http://www.wto.org/english/tratop_e/dispu_e/cases_e/ds397_e.htm)</p>
+        </authorialNote> (‘Reports’).</p>
+        <p>In the Reports, it was found, inter alia, that Article 9(5) of Council Regulation (EC) No 1225/2009 of <date date="2009-11-30">30 November 2009</date> on protection against dumped imports from countries not members of the European Community ('the Basic Anti-Dumping Regulation')<authorialNote id="_9003" placement="bottom"><p>OJ L 343, 22.12.2009, p. 51.</p></authorialNote> was inconsistent with Articles 6.10, 9.2 and 18.4 of the WTO Anti-Dumping Agreement and Article XVI:4 of the WTO Agreement. Article 9(5) of the Basic Anti-Dumping Regulation provides that individual exporting producers in non-market economy countries which do not receive market economy treatment pursuant to Article 2(7)(c) of the Basic Anti-Dumping Regulation will be subject to a countrywide duty rate unless such exporters can demonstrate that they meet the conditions for individual treatment laid out in Article 9(5) of the Basic Anti-Dumping Regulation ('the DSB finding on Article 9(5) of the Basic Anti-Dumping Regulation').</p>
+        <p>On <date date="2011-08-18">18 August 2011</date> the European Union notified the DSB that it intends to implement the recommendations and rulings of the DSB in this dispute in a manner that respects its WTO obligations.</p>
+        <p>On <date date="2012-01-19">19 January 2012</date> the European Union and China agreed that the reasonable period of time for implementing the DSB recommendations and rulings would be 14 months and two weeks from the date the DSB adopted the Reports. The reasonable period of time will therefore expire on <date date="2012-10-12">12 October 2012</date>.</p>
+        <p>It is in order to facilitate that the the reasonable period of time for implementing the DSB recommendations and rulings, which was agreed between the European Union and China on <date date="2012-01-19">19 January 2012</date>, can be respected by the European Union that the Committee for International Trade has adopted the draft resolution in simplified procedure.</p>
+    </mainBody>
+</doc>
+</akomaNtoso>

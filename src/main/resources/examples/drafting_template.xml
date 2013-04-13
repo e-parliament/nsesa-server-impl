@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.akomantoso.org/2.0 ../schema/akomantoso20-20120722.xsd"
+            xmlns="http://www.akomantoso.org/2.0">
+    <bill>
+        <meta>
+            <identification source="">
+                <FRBRWork>
+                    <FRBRthis value=""/>
+                    <FRBRuri value=""/>
+                    <FRBRdate date="2013-01-09" name=""/>
+                    <FRBRauthor href=""/>
+                    <FRBRcountry value=""/>
+                </FRBRWork>
+                <FRBRExpression>
+                    <FRBRthis value=""/>
+                    <FRBRuri value=""/>
+                    <FRBRdate date="2013-01-09" name=""/>
+                    <FRBRauthor href=""/>
+                    <FRBRlanguage language=""/>
+                </FRBRExpression>
+                <FRBRManifestation>
+                    <FRBRthis value=""/>
+                    <FRBRuri value=""/>
+                    <FRBRdate date="2013-01-09" name=""/>
+                    <FRBRauthor href=""/>
+                </FRBRManifestation>
+            </identification>
+        </meta>
+        <preface>
+            <container name="relatedProc" id="_2012744_0001">
+                <p>
+                    <docketNumber class="nsesa-select">{documentRef}</docketNumber>
+                </p>
+            </container>
+            <container name="mainDoc" id="_2012744_0002">
+                <p>
+                    <docTitle id="_2012744_0003" class="nsesa-inline">
+                        <docStage>{docStage}</docStage>
+                        for
+                        a
+                        <docType>
+                            <b>{docType}
+                            </b>
+                        </docType>
+                        <docPurpose>
+                            <b>{docPurpose}
+                            </b>
+                        </docPurpose>
+                    </docTitle>
+                </p>
+            </container>
+        </preface>
+        <preamble>
+            <formula id="_2012744_0004">
+                <p>THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION,</p>
+            </formula>
+            <citations id="_2012744_0005">
+                <citation id="_2012744_0006" class="nsesa-inline">
+                    <p>{citation}
+                    </p>
+                </citation>
+            </citations>
+            <recitals id="_2012744_0014">
+                <intro id="_2012744_0015">
+                    <p>Whereas:</p>
+                </intro>
+                <recital id="_2012744_0016" class="nsesa-inline">
+                    <num>(1)</num>
+                    <p>{recital}</p>
+                </recital>
+            </recitals>
+            <formula id="_2012744_0032">
+                <p>HAVE ADOPTED THIS REGULATION:</p>
+            </formula>
+        </preamble>
+        <body>
+            <article id="_2012744_0671">
+                <num>
+                    <i>Article 1</i>
+                </num>
+                <paragraph id="_2012744_0672" class="nsesa-inline">
+                    <content id="_2012744_0673">
+                        <p>{paragraph}</p>
+                    </content>
+                </paragraph>
+            </article>
+        </body>
+        <conclusions id="_2012744_0678">
+            <p>Done at Strasbourg,</p>
+            <table id="_2012744_0679">
+                <tr>
+                    <td>
+                        <p>
+                            <i>For the
+                                <organization refersTo="" id="_2012744_0680">European
+                                    Parliament
+                                </organization>
+                            </i>
+                        </p>
+                        <p>
+                            <i>The President</i>
+                        </p>
+                        <p>
+                            <signature>
+                                <placeholder/>
+                            </signature>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <i>For the
+                                <organization refersTo="" id="_2012744_0681"
+                                        >Council
+                                </organization>
+                            </i>
+                        </p>
+                        <p>
+                            <i>The President</i>
+                        </p>
+                        <p>
+                            <signature>
+                                <placeholder/>
+                            </signature>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </conclusions>
+    </bill>
+</akomaNtoso>

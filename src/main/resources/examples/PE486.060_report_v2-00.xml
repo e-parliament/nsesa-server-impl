@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.akomantoso.org/2.0 ../schema/akomantoso20-20120722.xsd http://europarl.europa.eu/xml4ep/2.0 ../schema/ep-2-0.xsd"
+    xmlns="http://www.akomantoso.org/2.0" xmlns:ep="http://europarl.europa.eu/xml4ep/2.0">
+    
+<documentCollection name="Report">
+    <meta>
+        <identification source="http://www.europarl.europa.eu/">
+            <FRBRWork>
+                <FRBRthis value="eu.europa.europarl:DIN1:(2012)0000486060"/>
+                <FRBRuri value=""/>
+                <FRBRdate date="2012-08-01" name="instantiation"/>
+                <FRBRauthor href=""/>
+                <preservation>
+                    <ep:idAlias id="_1300" ep:tref="xml4ep:/doc/idSchema/PEnumber" value="486060" />
+                    <ep:idAlias id="_85052" ep:tref="xml4ep:/doc/idSchema/sessionNumber" value="A7-0140/2012" />
+                </preservation>
+                <FRBRcountry value="eu" />
+            </FRBRWork>
+            <FRBRExpression>
+                <FRBRthis value="eu.europa.europarl:DIN1:(2012)0000486060@02.00-en-01.00"/>
+                <FRBRuri value=""/>
+                <FRBRdate date="2012-08-01" name="instantiation"/>
+                <FRBRauthor href=""/>
+                <preservation>
+                    <ep:idAlias id="_1346" ep:tref="xml4ep:/doc/idSchema/PEnumberVersion" value="486060v02-00" />
+                </preservation>
+                <FRBRlanguage id="_1347" language="en"/>
+            </FRBRExpression>
+            <FRBRManifestation>
+                <FRBRthis value="eu.europa.europarl:DIN1:(2012)0000486060@02.00-en-01.00@text/xml"/>
+                <FRBRuri value=""/>
+                <FRBRdate date="2012-08-01" name="instantiation"/>
+                <FRBRauthor href=""/>
+            </FRBRManifestation>
+        </identification>
+        <workflow source="http://www.europarl.europa.eu/">
+            <step id="_23001" date="2012-02-07" ep:ref="xml4ep:/event/document/submitted" />
+            <!-- INTA -->
+            <step id="_23002" date="2012-02-16" ep:ref="xml4ep:/event/document/committee_referred" actor="eu.europa.europarl.codict:organ/id=3746" as="xml4ep:/role/doc/responsibleOrganization" />
+            <!-- Vital Moreira -->
+            <step id="_23000" date="2012-02-29" ep:ref="xml4ep:/event/rapporteur/appointed" actor="eu.europa.europarl.codict:person/id=96930" as="xml4ep:/role/doc/rapporteur" />
+            <step id="_23004" date="2012-03-26" ep:ref="xml4ep:/event/committee/discussed" actor="eu.europa.europarl.codict:organ/id=3746" />
+            <step id="_23003" date="2012-03-27" ep:ref="xml4ep:/event/procedure/simplifiedProcedure/decided" />
+            <step id="_23005" date="2012-03-27" ep:ref="xml4ep:/event/document/adopted" actor="eu.europa.europarl.codict:organ/id=3746" />
+            <step id="_23006" date="2012-04-16" ep:ref="xml4ep:/event/document/tabled" actor="eu.europa.europarl.codict:organ/id=3746" />
+        </workflow>
+        <analysis source="http://www.europarl.europa.eu/">
+            <otherAnalysis source="http://www.europarl.europa.eu/">
+                <ep:legislature id="_80100" ep:ref="eu.europa.europarl.codict:organ/id=2918"/>
+                <ep:instanceInfo id="_80101">
+                    <ep:standalone id="_80102" value="true"/>
+                    <ep:docClass id="_80120" ep:category="xml4ep:/doc/category/report" ep:stage="xml4ep:/doc/stage/final"/>
+                    <ep:EPstatus id="_80130" ep:ref="xml4ep:/EPstatus/legislative"/>
+                    
+                    <ep:docCode id="_80103" ep:tref="xml4ep:/doc/type/schema/ITER" value="RPCF"/>
+                    <ep:docCode id="_80104" ep:tref="xml4ep:/doc/type/schema/IRO" value="RPCF"/>
+                    <ep:docCode id="_80105" ep:tref="xml4ep:/doc/type/schema/GEPRO" value="RR"/>
+                    <ep:docCode id="_80106" ep:tref="xml4ep:/doc/type/schema/DOCEP" value="PR_COD_1app"/>
+                    
+                    <ep:stakeholder id="_100" ep:role="xml4ep:/role/stakeholder/proponent">
+                        <ep:authority id="_8000" 
+                            ep:category="xml4ep:/authority/category/institution"
+                            ep:role="xml4ep:/role/doc/responsibleAuthority"
+                            ep:ref="eu.europa.europarl.codict:institution/id=27">
+                            <ep:organization id="_85363"
+                                ep:category="xml4ep:/organization/category/committee"
+                                ep:role="xml4ep:/role/doc/responsibleOrganization"
+                                ep:ref="eu.europa.europarl.codict:organ/id=3746">
+                                <ep:person id="_85464" 
+                                    ep:role="xml4ep:/role/doc/rapporteur"
+                                    ep:ref="eu.europa.europarl.codict:person/id=96930" />
+                            </ep:organization>
+                        </ep:authority>
+                    </ep:stakeholder>
+                </ep:instanceInfo>
+                <ep:procedure id="_80200">
+                    <ep:procNumber id="_80201" 
+                        ep:year="2012" 
+                        ep:seq="19"
+                        ep:category="xml4ep:/procedure/type/COD"
+                        ep:nature="xml4ep:/procedure/nature/LE" 
+                        ep:reading="1"/>
+                    <ep:docClass id="_80205" ep:category="xml4ep:/act/category/regulation"/>
+                    <ep:audience id="_80202" ep:ref="xml4ep:/concept/doc/audience/plenary"/>
+                    <ep:simplifiedProcedure id="_40" value="true"/>
+                    <ep:stakeholder id="_99" ep:role="xml4ep:/role/stakeholder/proponent">
+                        <ep:authority id="_80203" 
+                            ep:category="xml4ep:/authority/category/institution"
+                            ep:role="xml4ep:/role/procedure/initiativeRight" 
+                            ep:ref="eu.europa.europarl.codict:institution/id=10"/>
+                    </ep:stakeholder>
+                </ep:procedure>
+            </otherAnalysis>
+        </analysis>
+    </meta>
+    <coverPage>
+        <container id="_6001" name="titlePage">
+            <p><img id="_6002" src="udi:eu.europa.europarl:IMI1:(2012)0000001122@01.00-en-01.00@image/png"/></p>
+            <p><organization id="_6003" refersTo="~_8000" ep:class="FULLNAME_UC">EUROPEAN PARLIAMENT</organization></p>
+            <p><legislature refersTo="~_80100" ep:class="PERIOD">2009-2014</legislature></p>
+        </container>
+        
+        <container id="_6004" name="repeatable">
+            <block name="coverFooter">
+                <inline name="language" refersTo="~_1347">EN</inline>
+                <docNumber refersTo="~_1346">PE486.060v02-00</docNumber>
+                <inline name="instanceId"><inline name="docCode" refersTo="~_80105">PR</inline>\896863EN.doc</inline>
+                <term id="_6005" refersTo="" ep:ref="eu.europa.europarl.codict:...">United in diversity</term>
+            </block>
+        </container>
+    </coverPage>
+    <preface>
+        <container id="_7000" name="docHeader">
+            <p>Plenary sitting</p>            
+        </container>
+        <container id="_7001" name="mainDoc">
+            <p><docNumber refersTo="~_752">A7-0140/2012</docNumber></p> 
+            <p><date date="2012-04-16" ep:tref="xml4ep:/date/document/coverDate">16.4.2012</date></p>
+            <p><inline name="procSymbol">***I</inline></p>   
+            <p><docTitle><docType refersTo="~_782" ep:class="DEFAULT_UC">REPORT</docType><docPurpose>on the proposal for a regulation of the European Parliament and of the Council amending Council Regulation (EC) No 1225/2009 of <date date="2009-11-30">30 November 2009</date> on protection against dumped imports from countries not members of the European Community</docPurpose></docTitle></p>
+        </container>
+        <container id="_7006" name="relatedProc" refersTo="~_126">
+            <p>(<docNumber ep:tref="xml4ep:/doc/idSchema/COMnumber">COM(2012)0041</docNumber> - <docNumber ep:tref="xml4ep:/doc/idSchema/sessionNumber">C7-0030/2012</docNumber> - <docketNumber refersTo="~_80201">2012/0019(COD)</docketNumber>)</p>
+        </container>
+        <container id="_7007" name="mainDoc" refersTo="~_100">
+            <p><docCommittee>
+                <organization id="_7008" refersTo="~_85363" ep:class="FULLNAME">Committee on International Trade</organization>
+            </docCommittee></p>
+            <p><docIntroducer>Rapporteur: <person id="_7010" refersTo="~_85464">Vital Moreira</person></docIntroducer></p>
+        </container>
+        <container id="_7012" name="relatedRules" refersTo="~_40">
+            <p>(Simplified procedure – Rule 46(1) of the Rules of Procedure)</p>
+        </container>
+        <container id="_7013" name="otherCodes">
+            <p><inline name="docCode" refersTo="~_80106">PR_COD_1app</inline></p>
+        </container>
+        <container id="_7015" name="symbolsLegend">
+            <tblock id="_70150">
+                <heading>Symbols for procedures</heading>
+                <ul id="_701601">
+                    <li>*</li>
+                    <li>Consultation procedure</li>
+                </ul>
+                <ul id="_701611">
+                    <li>***</li>
+                    <li>Consent procedure</li>
+                </ul>
+                <ul id="_701621">
+                    <li>***I</li>
+                    <li>Ordinary legislative procedure (first reading)</li>
+                </ul>
+                <ul id="_701631">
+                    <li>***II</li>
+                    <li>Ordinary legislative procedure (second reading)</li>
+                </ul>
+                <ul id="_701641">
+                    <li>***III</li>
+                    <li>Ordinary legislative procedure (third reading)</li>
+                </ul>
+                <p>(The type of procedure depends on the legal basis proposed by the draft act)</p>
+            </tblock>        
+        </container>
+        <container id="_7017" name="extraNotes">
+            <tblock id="_7018">
+                <heading>Amendments to a draft act</heading>
+                <p>In amendments by Parliament, amendments to draft acts are highlighted in <b><i>bold italics</i></b>. Highlighting in <i>normal italics</i> is an indication for the relevant departments showing parts of the draft act which may require correction when the final text is prepared – for instance, obvious errors or omissions in a language version. Suggested corrections of this kind are subject to the agreement of the departments concerned.</p>
+                <p>The heading for any amendment to an existing act that the draft act seeks to amend includes a third line identifying the existing act and a fourth line identifying the provision in that act that Parliament wishes to amend. Passages in an existing act that Parliament wishes to amend, but that the draft act has left unchanged, are highlighted in <b>bold</b>. Any deletions that Parliament wishes to make in such passages are indicated thus: <b>[...]</b>.</p>
+            </tblock>
+        </container>
+        <container id="_7019" name="contents">
+            <p ep:style="TOC Heading">CONTENTS</p>
+            <p ep:style="TOC Page">Page</p>
+            <p><placeholder>{TOC \t "PageHeading;1"}</placeholder></p>
+        </container>
+    </preface>
+    <collectionBody>
+        <componentRef id="_99001" src="udi:eu.europa.europarl:DIN1:(2012)0004860601@01.00-en-01.00" showAs="DRAFT EUROPEAN PARLIAMENT LEGISLATIVE RESOLUTION"/>
+        <componentRef id="_99002" src="udi:eu.europa.europarl:ICI1:(2012)0004860602@01.00-en-01.00" showAs="EXPLANATORY STATEMENT"/>
+        <interstitial id="_99100">
+            <tblock id="_99101">
+                <heading ep:toc="true">PROCEDURE</heading>
+                <blockList id="_99102">
+                    <item id="_99103">
+                        <heading>Title</heading>
+                        <ul id="_99104">
+                            <li>Protection against dumped imports from countries not members of the European Community</li>
+                        </ul>
+                    </item>
+                    <item id="_99105">
+                        <heading>References</heading>
+                        <ul id="_99106">
+                            <li><docNumber ep:tref="xml4ep:/doc/idSchema/COMnumber">COM(2012)0041</docNumber> - <docNumber ep:tref="xml4ep:/doc/idSchema/sessionNumber">C7-0030/2012</docNumber> - <docketNumber refersTo="~_80201">2012/0019(COD)</docketNumber></li>
+                        </ul>
+                    </item>
+                    <item id="_99107">
+                        <heading>Date submitted to Parliament</heading>
+                        <ul id="_99108">
+                            <li><date date="2012-02-07" refersTo="~_23001">7.2.2012</date></li> 
+                        </ul>
+                    </item>
+                    <item id="_99109">
+                        <heading>Committee responsible</heading><subheading>Date announced in plenary</subheading>
+                        <ul id="_99110">
+                            <li><organization id="_99111" refersTo="~_85363">INTA</organization><date date="2012-02-16" refersTo="~_23002">16.2.2012</date></li> 
+                        </ul>
+                    </item>
+                    <item id="_99120">
+                        <heading>Rapporteur(s)</heading><subheading>Date appointed</subheading>
+                        <ul id="_99121">
+                            <li><person id="_99122" refersTo="~_85464">Vital Moreira</person><date date="2012-02-29" refersTo="~_23000">29.2.2012</date></li> 
+                        </ul>
+                    </item>
+                    <item id="_99123">
+                        <heading>Simplified procedure - date of decision</heading>
+                        <ul id="_99124">
+                            <li><date date="2012-03-27" refersTo="~_23003">27.3.2012</date></li> 
+                        </ul>
+                    </item>
+                    <item id="_99125">
+                        <heading>Discussed in committee</heading>
+                        <ul id="_99126">
+                            <li><date date="2012-03-26" refersTo="~_23004">26.3.2012</date></li> 
+                        </ul>
+                    </item>
+                    <item id="_99127">
+                        <heading>Date adopted</heading>
+                        <ul id="_99128">
+                            <li><date date="2012-03-27" refersTo="~_23005">27.3.2012</date></li> 
+                        </ul>
+                    </item>
+                    <item id="_99176">
+                        <heading>Date tabled</heading>
+                        <ul id="_99177">
+                            <li><date date="2012-04-16" refersTo="~_23006">16.4.2012</date></li> 
+                        </ul>
+                    </item>
+                </blockList>
+            </tblock>
+        </interstitial>
+    </collectionBody>
+</documentCollection>
+    
+</akomaNtoso>
