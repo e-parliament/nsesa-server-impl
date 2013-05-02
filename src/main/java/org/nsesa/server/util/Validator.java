@@ -46,9 +46,9 @@ public class Validator {
 
             factory.setSchema(schemaFactory.newSchema(schemas.toArray(new Source[schemas.size()])));
 
-            final SAXParser parser = factory.newSAXParser();
+            SAXParser parser = factory.newSAXParser();
 
-            final XMLReader reader = parser.getXMLReader();
+            XMLReader reader = parser.getXMLReader();
 
             final LoggingErrorHandler loggingErrorHandler = new LoggingErrorHandler();
             reader.setErrorHandler(loggingErrorHandler);
