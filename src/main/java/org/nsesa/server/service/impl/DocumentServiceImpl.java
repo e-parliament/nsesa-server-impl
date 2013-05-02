@@ -1,6 +1,5 @@
 package org.nsesa.server.service.impl;
 
-import com.google.common.io.Files;
 import com.inspiresoftware.lib.dto.geda.assembler.Assembler;
 import com.inspiresoftware.lib.dto.geda.assembler.DTOAssembler;
 import com.inspiresoftware.lib.dto.geda.assembler.dsl.impl.DefaultDSLRegistry;
@@ -10,7 +9,6 @@ import org.nsesa.server.dto.DocumentDTO;
 import org.nsesa.server.repository.DocumentRepository;
 import org.nsesa.server.service.api.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -18,8 +16,6 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -73,11 +69,15 @@ public class DocumentServiceImpl implements DocumentService {
     @Path("/save")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Override
-    public void saveDocument(DocumentDTO documentDTO) {
+    public DocumentDTO saveDocument(DocumentDTO documentDTO) {
         Document document = documentRepository.findByDocumentID(documentDTO.getDocumentID());
         if (document == null) document = new Document();
+        documentAssembler.assembleEntity(documentDTO, document, getConvertors(), new DefaultDSLRegistry());
+        document = fromDocumentDTO(documentDTO);
+        documentRepository.save(document);
+        // since there might be changes (lock version, last modification date, etc ...)
         documentAssembler.assembleDto(documentDTO, document, getConvertors(), new DefaultDSLRegistry());
-        documentRepository.save(fromDocumentDTO(documentDTO));
+        return documentDTO;
     }
 
     @GET
@@ -89,6 +89,18 @@ public class DocumentServiceImpl implements DocumentService {
         final List<DocumentDTO> documentDTOs = new ArrayList<DocumentDTO>();
         documentAssembler.assembleDtos(documentDTOs, page.getContent(), new HashMap<String, Object>(), new DefaultDSLRegistry());
         return documentDTOs;
+    }
+
+    @Override
+    public List<DocumentDTO> getAvailableTranslations(@WebParam(name = "documentID") String documentID) {
+        // TODO
+        return new ArrayList<DocumentDTO>();
+    }
+
+    @Override
+    public List<DocumentDTO> getRelatedDocuments(@WebParam(name = "documentID") String documentID) {
+        // TODO
+        return new ArrayList<DocumentDTO>();
     }
 
     private Document fromDocumentDTO(DocumentDTO documentDTO) {

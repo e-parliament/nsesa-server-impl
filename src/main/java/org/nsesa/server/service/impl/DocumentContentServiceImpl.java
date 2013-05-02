@@ -22,7 +22,6 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -124,6 +123,14 @@ public class DocumentContentServiceImpl implements DocumentContentService {
         final List<DocumentContentDTO> documentDTOs = new ArrayList<DocumentContentDTO>();
         documentContentAssembler.assembleDtos(documentDTOs, page.getContent(), new HashMap<String, Object>(), new DefaultDSLRegistry());
         return documentDTOs;
+    }
+
+    @GET
+    @Path("/{documentID}/{elementID:.+}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Override
+    public String getDocumentFragment(@PathParam("documentID") final String documentID, @PathParam("xpathExpression") final String xpathExpression) {
+        throw new UnsupportedOperationException("Not yet implemented.");
     }
 
     private Map<String, Object> getConvertors() {
