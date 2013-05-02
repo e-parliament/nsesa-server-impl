@@ -25,6 +25,7 @@
             <ref bean="documentService"/>
             <ref bean="personService"/>
             <ref bean="amendmentService"/>
+            <ref bean="documentContentService"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean='jacksonProvider'/>
@@ -39,6 +40,15 @@
             <entry key="exceptionMessageCauseEnabled" value="true"/>
         </jaxws:properties>
     </jaxws:endpoint>
+
+    <jaxws:endpoint id="documentContentServiceWS"
+                    implementor="#documentContentService"
+                    address="/DocumentContentService">
+        <jaxws:properties>
+            <entry key="exceptionMessageCauseEnabled" value="true"/>
+        </jaxws:properties>
+    </jaxws:endpoint>
+
     <jaxws:endpoint id="personServiceWS"
                     implementor="#personService"
                     address="/PersonService">
@@ -46,6 +56,7 @@
             <entry key="exceptionMessageCauseEnabled" value="true"/>
         </jaxws:properties>
     </jaxws:endpoint>
+
     <jaxws:endpoint id="amendmentServiceWS"
                     implementor="#amendmentService"
                     address="/AmendmentService">

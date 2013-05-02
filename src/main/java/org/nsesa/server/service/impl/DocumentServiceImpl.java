@@ -21,7 +21,6 @@ import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Date: 11/03/13 15:52
@@ -36,8 +35,6 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Autowired
     DocumentRepository documentRepository;
-
-    Map<String, Resource> documents;
 
     final Assembler documentAssembler = DTOAssembler.newAssembler(DocumentDTO.class, Document.class);
 
@@ -72,27 +69,11 @@ public class DocumentServiceImpl implements DocumentService {
         return documentDTO;
     }
 
-    @GET
-    @Path("/content/{documentID}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
-    @Override
-    public String getDocumentContent(@PathParam("documentID") String documentID) {
-        Resource documentResource = documents.get(documentID);
-        if (documentResource != null) {
-            try {
-                return Files.toString(documentResource.getFile(), Charset.forName("UTF-8"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
-
     @POST
     @Path("/save")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Override
-    public void save(DocumentDTO documentDTO) {
+    public void saveDocument(DocumentDTO documentDTO) {
         Document document = documentRepository.findByDocumentID(documentDTO.getDocumentID());
         if (document == null) document = new Document();
         documentAssembler.assembleDto(documentDTO, document, getConvertors(), new DefaultDSLRegistry());
@@ -103,9 +84,8 @@ public class DocumentServiceImpl implements DocumentService {
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Override
-    public List<DocumentDTO> findAll() {
-
-        final Page<Document> page = documentRepository.findAll(new PageRequest(0, 25));
+    public List<DocumentDTO> list(@DefaultValue("0") @QueryParam("offset") int offset, @DefaultValue("5") @QueryParam("rows") int rows) {
+        final Page<Document> page = documentRepository.findAll(new PageRequest(offset, rows));
         final List<DocumentDTO> documentDTOs = new ArrayList<DocumentDTO>();
         documentAssembler.assembleDtos(documentDTOs, page.getContent(), new HashMap<String, Object>(), new DefaultDSLRegistry());
         return documentDTOs;
@@ -123,11 +103,5 @@ public class DocumentServiceImpl implements DocumentService {
 
     private Map<String, Object> getConvertors() {
         return new HashMap<String, Object>();
-    }
-
-    // Spring setter ---------------------
-
-    public void setDocuments(Map<String, Resource> documents) {
-        this.documents = documents;
     }
 }
