@@ -109,7 +109,7 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Path("/save")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Override
-    public AmendmentContainerDTO save(final @PathParam("amendmentContainerDTO") AmendmentContainerDTO amendmentContainerDTO) {
+    public AmendmentContainerDTO save(final AmendmentContainerDTO amendmentContainerDTO) {
 
         // find existing
         AmendmentContainer amendmentContainer = amendmentContainerRepository.findByAmendmentContainerID(amendmentContainerDTO.getAmendmentContainerID());
