@@ -8,8 +8,6 @@ import org.apache.cxf.annotations.GZIP;
 import org.nsesa.server.domain.AmendmentContainer;
 import org.nsesa.server.domain.Document;
 import org.nsesa.server.domain.Person;
-import org.nsesa.server.dto.AmendableWidgetReference;
-import org.nsesa.server.dto.AmendmentAction;
 import org.nsesa.server.dto.AmendmentContainerDTO;
 import org.nsesa.server.repository.AmendmentContainerRepository;
 import org.nsesa.server.repository.DocumentRepository;
@@ -66,10 +64,12 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Override
     public AmendmentContainerDTO getAmendmentContainer(@PathParam("amendmentContainerID") String amendmentContainerID) {
         final AmendmentContainerDTO amendmentContainerDTO = new AmendmentContainerDTO();
-        amendmentContainerDTO.setAmendmentContainerID(amendmentContainerID);
-        amendmentContainerDTO.setAmendmentAction(AmendmentAction.MODIFICATION);
-        amendmentContainerDTO.setSourceReference(new AmendableWidgetReference("//akomaNtoso[0]/foo[1]"));
-        return amendmentContainerDTO;
+        final AmendmentContainer amendmentContainer = amendmentContainerRepository.findByAmendmentContainerID(amendmentContainerID);
+        if (amendmentContainer != null) {
+            amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
+            return amendmentContainerDTO;
+        }
+        return null;
     }
 
     @GET
