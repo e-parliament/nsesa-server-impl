@@ -1,8 +1,5 @@
 package org.nsesa.server.domain;
 
-import com.inspiresoftware.lib.dto.geda.annotations.Dto;
-import com.inspiresoftware.lib.dto.geda.annotations.DtoField;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,57 +12,64 @@ import java.util.List;
  * @version $Id$
  */
 @Entity
+@Table(name = "amendment")
 public class AmendmentContainer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
 
+    @Column(nullable = false, length = 64)
     private String amendmentContainerID;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Document document;
 
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Calendar creationDate;
 
     @Temporal(TemporalType.DATE)
     private Calendar modificationDate;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Person person;
 
     /**
      * A revision key that identifies all amendment revisions for a single, logical amendment.
      */
+    @Column(nullable = false, length = 64)
     private String revisionID;
 
     /**
      * The two letter ISO code of the (primary) language this amendment is created in.
      */
+    @Column(nullable = false, length = 2)
     private String languageISO;
 
     /**
      * The type of action of this amendment (modification, deletion, creation, move, ...)
      */
+    @Enumerated(EnumType.STRING)
     private AmendmentAction amendmentAction;
 
     /**
      * The status of an amendment. The initial status of an amendment is 'candidate'. Left as a String for
      * easier extension.
      */
+    @Column(nullable = false, length = 32)
     private String amendmentContainerStatus = "candidate";
 
     /**
      * The serialized body/payload of this amendment. Can be XML or JSON, depending on what your backend provides.
      */
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String body;
 
     /**
      * A reference to the source of this this amendment (meaning, the place where the amendment should be injected upon)
      */
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
     private AmendableWidgetReference sourceReference;
 
     /**
@@ -75,7 +79,7 @@ public class AmendmentContainer {
      * <p/>
      * TODO the target references are not yet supported
      */
-    @Transient
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<AmendableWidgetReference> targetReferences = new ArrayList<AmendableWidgetReference>();
 
     public AmendmentContainer() {

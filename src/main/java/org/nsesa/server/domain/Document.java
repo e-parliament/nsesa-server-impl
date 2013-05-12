@@ -1,8 +1,5 @@
 package org.nsesa.server.domain;
 
-import com.inspiresoftware.lib.dto.geda.annotations.Dto;
-import com.inspiresoftware.lib.dto.geda.annotations.DtoField;
-
 import javax.persistence.*;
 import java.util.Calendar;
 
@@ -13,6 +10,7 @@ import java.util.Calendar;
  * @version $Id$
  */
 @Entity
+@Table(name = "document")
 public class Document {
 
     @Id
@@ -22,9 +20,11 @@ public class Document {
     /**
      * public key.
      */
+    @Column(nullable = false, length = 64)
     private String documentID;
 
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Calendar creationDate;
 
     @Temporal(TemporalType.DATE)
@@ -33,10 +33,13 @@ public class Document {
     /**
      * The name of the document.
      */
+    @Column(nullable = false, length = 128)
     private String name;
+
     /**
      * The 2 letter ISO code for this translation.
      */
+    @Column(nullable = false, length = 2)
     private String languageIso;
 
     /**
