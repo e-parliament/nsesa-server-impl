@@ -3,7 +3,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -16,17 +15,31 @@
             http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd
-            http://www.springframework.org/schema/jdbc
-            http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Configure the properties via placeholders. We will first read the properties file on the classpath,
+        which can be overridden via another properties file in the local home directory. -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:nsesa-server.properties</value>
+                <value>file:///${user.home}/nsesa-server.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="false"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+    </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="persistenceUnitName" value="spring-jpa"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="true"/>
-                <property name="generateDdl" value="true"/>
-                <property name="database" value="H2"/>
+                <property name="showSql" value="${jpa.showSql}"/>
+                <property name="generateDdl" value="${jpa.generateDdl}"/>
+                <property name="database" value="${jpa.database}"/>
             </bean>
         </property>
     </bean>
@@ -39,10 +52,31 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <jdbc:embedded-database id="dataSource" type="H2"/>
-    <!--<jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="classpath:sql/test-data.sql" encoding="UTF-8" execution="INIT"/>
-    </jdbc:initialize-database>-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <property name="autoCommitOnClose" value="false"/>
+        <property name="minPoolSize" value="${jdbc.minPoolSize}">
+            <description>Minimum number of connections a pool will maintain at any given time.</description>
+        </property>
+
+        <property name="acquireIncrement" value="${jdbc.acquireIncrement}">
+            <description>Determines how many connections at a time c3p0 will try to acquire when the pool is
+                exhausted.
+            </description>
+        </property>
+
+        <property name="maxStatementsPerConnection" value="${jdbc.maxStatementsPerConnection}">
+            <description>The number of PreparedStatements c3p0 will cache for a single pooled Connection.</description>
+        </property>
+
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}">
+            <description>Maximum number of connections a pool will maintain at any given time.</description>
+        </property>
+    </bean>
 
     <aop:aspectj-autoproxy/>
 
