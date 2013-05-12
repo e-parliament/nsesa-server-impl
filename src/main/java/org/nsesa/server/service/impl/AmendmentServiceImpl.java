@@ -14,14 +14,13 @@ import org.nsesa.server.repository.DocumentRepository;
 import org.nsesa.server.repository.PersonRepository;
 import org.nsesa.server.service.api.AmendmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Date: 11/03/13 15:52
@@ -57,24 +56,10 @@ public class AmendmentServiceImpl implements AmendmentService {
 
     private final Assembler amendmentContainerAssembler = DTOAssembler.newAssembler(AmendmentContainerDTO.class, AmendmentContainer.class);
 
-
-    @GET
-    @Path("/id/{amendmentContainerID}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
-    @Override
-    public AmendmentContainerDTO getAmendmentContainer(@PathParam("amendmentContainerID") String amendmentContainerID) {
-        final AmendmentContainerDTO amendmentContainerDTO = new AmendmentContainerDTO();
-        final AmendmentContainer amendmentContainer = amendmentContainerRepository.findByAmendmentContainerID(amendmentContainerID);
-        if (amendmentContainer != null) {
-            amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
-            return amendmentContainerDTO;
-        }
-        return null;
-    }
-
     @GET
     @Path("/document/{documentID}/{personID}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
     @Override
     public List<AmendmentContainerDTO> getAmendmentContainersByDocumentAndPerson(@PathParam("documentID") String documentID, @PathParam("personID") String personID) {
         final Person person = personRepository.findByPersonID(personID);
@@ -91,8 +76,24 @@ public class AmendmentServiceImpl implements AmendmentService {
     }
 
     @GET
+    @Path("/id/{amendmentContainerID}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
+    @Override
+    public AmendmentContainerDTO getAmendmentContainer(@PathParam("amendmentContainerID") String amendmentContainerID) {
+        final AmendmentContainerDTO amendmentContainerDTO = new AmendmentContainerDTO();
+        final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByAmendmentContainerIDOrderByCreationDateDesc(amendmentContainerID, new PageRequest(0, 1));
+        if (amendmentContainers != null && !amendmentContainers.isEmpty()) {
+            amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainers.get(0), getConvertors(), new DefaultDSLRegistry());
+            return amendmentContainerDTO;
+        }
+        return null;
+    }
+
+    @GET
     @Path("/document/{documentID}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
     @Override
     public List<AmendmentContainerDTO> getAmendmentContainersByDocument(@PathParam("documentID") String documentID) {
         final Document document = documentRepository.findByDocumentID(documentID);
@@ -105,16 +106,63 @@ public class AmendmentServiceImpl implements AmendmentService {
         return null;
     }
 
+    @GET
+    @Path("/revision/{revisionID}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
+    @Override
+    public AmendmentContainerDTO getAmendmentContainerVersion(@PathParam("revisionID") String revisionID) {
+        AmendmentContainerDTO amendmentContainerDTO = new AmendmentContainerDTO();
+        AmendmentContainer amendmentContainer = amendmentContainerRepository.findByRevisionID(revisionID);
+        if (amendmentContainer != null) {
+            amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
+            return amendmentContainerDTO;
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/revisions/{amendmentContainerID}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
+    @Override
+    public List<String> getAmendmentContainerVersions(@PathParam("amendmentContainerID") String amendmentContainerID) {
+        final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByAmendmentContainerID(amendmentContainerID);
+        final List<String> revisionIDs = new ArrayList<String>();
+        for (final AmendmentContainer amendmentContainer : amendmentContainers) {
+            revisionIDs.add(amendmentContainer.getRevisionID());
+        }
+        return revisionIDs;
+    }
+
     @POST
     @Path("/save")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional()
     @Override
     public AmendmentContainerDTO save(final AmendmentContainerDTO amendmentContainerDTO) {
+        // see if we already have an existing amendment under this revision
+        final List<AmendmentContainer> existing = amendmentContainerRepository.findByAmendmentContainerIDOrderByCreationDateDesc(amendmentContainerDTO.getAmendmentContainerID(), new PageRequest(0, 1));
+        if (existing != null && !existing.isEmpty()) {
+            // check to verify we have the latest
+            if (amendmentContainerDTO.getRevisionID().equals(existing.get(0).getRevisionID())) {
+                // set new revision
+                amendmentContainerDTO.setRevisionID(UUID.randomUUID().toString());
+            } else {
+                // todo stale resource
+                throw new RuntimeException("Stale resource detected; given revisionID is " + amendmentContainerDTO.getRevisionID() + ", latest revision in database is " + existing.get(0).getRevisionID());
+            }
+        }
 
-        // find existing
-        AmendmentContainer amendmentContainer = amendmentContainerRepository.findByAmendmentContainerID(amendmentContainerDTO.getAmendmentContainerID());
-        if (amendmentContainer == null) amendmentContainer = new AmendmentContainer();
+        AmendmentContainer amendmentContainer = new AmendmentContainer();
         amendmentContainerAssembler.assembleEntity(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
+
+        // make sure to set the creation date if the amendment is new (as well as the modification date)
+        // TODO use @BeforePersist callbacks
+        final Calendar calendar = GregorianCalendar.getInstance();
+        if (amendmentContainer.getCreationDate() == null) amendmentContainer.setCreationDate(calendar);
+        amendmentContainer.setModificationDate(calendar);
+
         amendmentContainer = amendmentContainerRepository.save(amendmentContainer);
         amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
         return amendmentContainerDTO;
@@ -123,11 +171,14 @@ public class AmendmentServiceImpl implements AmendmentService {
     @POST
     @Path("/delete/{amendmentContainerID}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional()
     @Override
     public void delete(final @PathParam("amendmentContainerID") String amendmentContainerID) {
-        final AmendmentContainer container = amendmentContainerRepository.findByAmendmentContainerID(amendmentContainerID);
-        if (container != null) {
-            amendmentContainerRepository.delete(container);
+        final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByAmendmentContainerID(amendmentContainerID);
+        for (final AmendmentContainer container : amendmentContainers) {
+            if (container != null) {
+                amendmentContainerRepository.delete(container);
+            }
         }
     }
 
