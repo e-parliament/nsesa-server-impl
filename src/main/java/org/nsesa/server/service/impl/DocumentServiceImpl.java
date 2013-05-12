@@ -11,6 +11,7 @@ import org.nsesa.server.service.api.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -37,6 +38,7 @@ public class DocumentServiceImpl implements DocumentService {
     @GET
     @Path("/id/{documentID}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional()
     @Override
     public DocumentDTO getDocument(@PathParam("documentID") String documentID) {
         Document document = documentRepository.findByDocumentID(documentID);
@@ -68,6 +70,7 @@ public class DocumentServiceImpl implements DocumentService {
     @POST
     @Path("/save")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional()
     @Override
     public DocumentDTO saveDocument(DocumentDTO documentDTO) {
         Document document = documentRepository.findByDocumentID(documentDTO.getDocumentID());
@@ -83,6 +86,7 @@ public class DocumentServiceImpl implements DocumentService {
     @GET
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
     @Override
     public List<DocumentDTO> list(@DefaultValue("0") @QueryParam("offset") int offset, @DefaultValue("5") @QueryParam("rows") int rows) {
         final Page<Document> page = documentRepository.findAll(new PageRequest(offset, rows));

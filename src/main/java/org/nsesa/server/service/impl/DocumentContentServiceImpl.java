@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -50,12 +51,14 @@ public class DocumentContentServiceImpl implements DocumentContentService {
 
     final Assembler documentContentAssembler = DTOAssembler.newAssembler(DocumentContentDTO.class, DocumentContent.class);
 
+    @Transactional()
     public void init() {
         // initialize data
         for (Map.Entry<String, Resource> entry : documents.entrySet()) {
             try {
                 final String content = Files.toString(entry.getValue().getFile(), Charset.forName("UTF-8"));
-                final DocumentContent documentContent = new DocumentContent();
+                DocumentContent documentContent = documentContentRepository.findByDocumentID(entry.getKey());
+                if (documentContent == null) documentContent = new DocumentContent();
                 documentContent.setContent(content);
                 documentContent.setDocumentID(entry.getKey());
                 documentContentRepository.save(documentContent);
@@ -69,6 +72,7 @@ public class DocumentContentServiceImpl implements DocumentContentService {
     @GET
     @Path("/documentID/{documentID:.+}") // we need a regex here or remote document IDs won't work since in JaxRS
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
     @Override
     public DocumentContentDTO getDocumentContent(@PathParam("documentID") String documentID) {
         DocumentContent documentContent = documentContentRepository.findByDocumentID(documentID);
@@ -102,6 +106,7 @@ public class DocumentContentServiceImpl implements DocumentContentService {
 
     @POST
     @Path("/save")
+    @Transactional()
     @Override
     public void saveDocumentContent(@WebParam(name = "documentContentDTO") DocumentContentDTO documentContentDTO) {
         // validate first
@@ -117,6 +122,7 @@ public class DocumentContentServiceImpl implements DocumentContentService {
     @GET
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
     @Override
     public List<DocumentContentDTO> list(@DefaultValue("0") @QueryParam("offset") int offset, @DefaultValue("5") @QueryParam("rows") int rows) {
         final Page<DocumentContent> page = documentContentRepository.findAll(new PageRequest(offset, rows));
@@ -126,8 +132,9 @@ public class DocumentContentServiceImpl implements DocumentContentService {
     }
 
     @GET
-    @Path("/{documentID}/{elementID:.+}")
+    @Path("/fragment/{documentID}/{elementID:.+}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
     @Override
     public String getDocumentFragment(@PathParam("documentID") final String documentID, @PathParam("xpathExpression") final String xpathExpression) {
         throw new UnsupportedOperationException("Not yet implemented.");
