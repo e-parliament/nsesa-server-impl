@@ -3,7 +3,6 @@ package org.nsesa.server.repository;
 import org.nsesa.server.domain.AmendmentContainer;
 import org.nsesa.server.domain.Document;
 import org.nsesa.server.domain.Person;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,15 +17,13 @@ import java.util.List;
 @Repository
 public interface AmendmentContainerRepository extends PagingAndSortingRepository<AmendmentContainer, Long> {
 
-    List<AmendmentContainer> findByDocumentAndPerson(Document document, Person person);
+    List<AmendmentContainer> findByDocumentAndPersonAndLatestRevision(Document document, Person person, Boolean latestRevision);
 
-    List<AmendmentContainer> findByAmendmentContainerID(String amendmentContainerID);
+    List<AmendmentContainer> findByAmendmentContainerIDOrderByCreationDateDesc(String amendmentContainerID);
 
     List<AmendmentContainer> findByDocument(Document document);
 
-    List<AmendmentContainer> findLatestByDocument(Document document);
-
     AmendmentContainer findByRevisionID(String revisionID);
 
-    List<AmendmentContainer> findByAmendmentContainerIDOrderByCreationDateDesc(String amendmentContainerID, Pageable pageable);
+    AmendmentContainer findByAmendmentContainerIDAndLatestRevision(String amendmentContainerID, Boolean latestRevision);
 }

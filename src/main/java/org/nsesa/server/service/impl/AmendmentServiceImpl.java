@@ -17,7 +17,6 @@ import org.nsesa.server.repository.DocumentRepository;
 import org.nsesa.server.repository.PersonRepository;
 import org.nsesa.server.service.api.AmendmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebService;
@@ -64,18 +63,18 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Transactional(readOnly = true)
     @Override
-    public List<AmendmentContainerDTO> getAmendmentContainersByDocumentAndPerson(@PathParam("documentID") String documentID, @PathParam("personID") String personID) {
+    public List<AmendmentContainerDTO> getAmendmentContainersByDocumentAndPerson(@PathParam("documentID") String documentID, @PathParam("personID") String personID) throws ResourceNotFoundException {
         final Person person = personRepository.findByPersonID(personID);
         if (person != null) {
             final Document document = documentRepository.findByDocumentID(documentID);
             if (document != null) {
-                final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByDocumentAndPerson(document, person);
+                final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByDocumentAndPersonAndLatestRevision(document, person, true);
                 final List<AmendmentContainerDTO> amendmentContainerDTOs = new ArrayList<AmendmentContainerDTO>();
                 amendmentContainerAssembler.assembleDtos(amendmentContainerDTOs, amendmentContainers, getConvertors(), new DefaultDSLRegistry());
                 return amendmentContainerDTOs;
             }
         }
-        return null;
+        throw new ResourceNotFoundException("No person with personID " + personID + " found.");
     }
 
     @GET
@@ -83,14 +82,14 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Transactional(readOnly = true)
     @Override
-    public AmendmentContainerDTO getAmendmentContainer(@PathParam("amendmentContainerID") String amendmentContainerID) {
+    public AmendmentContainerDTO getAmendmentContainer(@PathParam("amendmentContainerID") String amendmentContainerID) throws ResourceNotFoundException {
         final AmendmentContainerDTO amendmentContainerDTO = new AmendmentContainerDTO();
-        final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByAmendmentContainerIDOrderByCreationDateDesc(amendmentContainerID, new PageRequest(0, 1));
-        if (amendmentContainers != null && !amendmentContainers.isEmpty()) {
-            amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainers.get(0), getConvertors(), new DefaultDSLRegistry());
+        final AmendmentContainer amendmentContainer = amendmentContainerRepository.findByAmendmentContainerIDAndLatestRevision(amendmentContainerID, true);
+        if (amendmentContainer != null) {
+            amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
             return amendmentContainerDTO;
         }
-        return null;
+        throw new ResourceNotFoundException("No amendment with amendmentContainerID " + amendmentContainerID + " found.");
     }
 
     @GET
@@ -98,7 +97,7 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Transactional(readOnly = true)
     @Override
-    public List<AmendmentContainerDTO> getAmendmentContainersByDocument(@PathParam("documentID") String documentID) {
+    public List<AmendmentContainerDTO> getAmendmentContainersByDocument(@PathParam("documentID") String documentID) throws ResourceNotFoundException {
         final Document document = documentRepository.findByDocumentID(documentID);
         if (document != null) {
             final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByDocument(document);
@@ -106,7 +105,7 @@ public class AmendmentServiceImpl implements AmendmentService {
             amendmentContainerAssembler.assembleDtos(amendmentContainerDTOs, amendmentContainers, getConvertors(), new DefaultDSLRegistry());
             return amendmentContainerDTOs;
         }
-        return null;
+        throw new ResourceNotFoundException("No document with documentID " + documentID + " found.");
     }
 
     @GET
@@ -114,14 +113,14 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Transactional(readOnly = true)
     @Override
-    public AmendmentContainerDTO getAmendmentContainerVersion(@PathParam("revisionID") String revisionID) {
+    public AmendmentContainerDTO getAmendmentContainerVersion(@PathParam("revisionID") String revisionID) throws ResourceNotFoundException {
         AmendmentContainerDTO amendmentContainerDTO = new AmendmentContainerDTO();
         AmendmentContainer amendmentContainer = amendmentContainerRepository.findByRevisionID(revisionID);
         if (amendmentContainer != null) {
             amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
             return amendmentContainerDTO;
         }
-        return null;
+        throw new ResourceNotFoundException("No amendment with revision " + revisionID + " found.");
     }
 
     @GET
@@ -130,7 +129,7 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Transactional(readOnly = true)
     @Override
     public List<String> getAmendmentContainerVersions(@PathParam("amendmentContainerID") String amendmentContainerID) {
-        final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByAmendmentContainerID(amendmentContainerID);
+        final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByAmendmentContainerIDOrderByCreationDateDesc(amendmentContainerID);
         final List<String> revisionIDs = new ArrayList<String>();
         for (final AmendmentContainer amendmentContainer : amendmentContainers) {
             revisionIDs.add(amendmentContainer.getRevisionID());
@@ -145,20 +144,23 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Override
     public AmendmentContainerDTO save(final AmendmentContainerDTO amendmentContainerDTO) throws StaleResourceException, ResourceNotFoundException, ValidationException {
         // see if we already have an existing amendment under this revision
-        final List<AmendmentContainer> existing = amendmentContainerRepository.findByAmendmentContainerIDOrderByCreationDateDesc(amendmentContainerDTO.getAmendmentContainerID(), new PageRequest(0, 1));
-        if (existing != null && !existing.isEmpty()) {
-            // check to verify we have the latest
-            if (amendmentContainerDTO.getRevisionID().equals(existing.get(0).getRevisionID())) {
-                // set new revision
-                amendmentContainerDTO.setRevisionID(UUID.randomUUID().toString());
-            } else {
-                // todo stale resource
-                throw new StaleResourceException("Stale resource detected; given revisionID is " + amendmentContainerDTO.getRevisionID() + ", latest revision in database is " + existing.get(0).getRevisionID());
-            }
-        }
-
+        final AmendmentContainer previous = amendmentContainerRepository.findByAmendmentContainerIDAndLatestRevision(amendmentContainerDTO.getAmendmentContainerID(), true);
         AmendmentContainer amendmentContainer = new AmendmentContainer();
         amendmentContainerAssembler.assembleEntity(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
+
+        if (previous != null) {
+            if (amendmentContainerDTO.getRevisionID().equals(previous.getRevisionID())) {
+                // set new revision
+                amendmentContainer.setRevisionID(UUID.randomUUID().toString());
+                amendmentContainer.setPreviousAmendmentContainer(previous);
+                // pass the 'latest' flag from the previous to the new one
+                previous.setLatestRevision(false);
+
+            } else {
+                throw new StaleResourceException("Stale resource detected; given revisionID is " + amendmentContainerDTO.getRevisionID() + ", latest revision in database is " + previous.getRevisionID());
+            }
+        }
+        amendmentContainer.setLatestRevision(true);
 
         // make sure to set the creation date if the amendment is new (as well as the modification date)
         // TODO use @BeforePersist callbacks
@@ -171,18 +173,41 @@ public class AmendmentServiceImpl implements AmendmentService {
         return amendmentContainerDTO;
     }
 
-    @POST
-    @Path("/delete/{amendmentContainerID}")
+    @DELETE
+    @Path("/id/{amendmentContainerID}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Transactional()
     @Override
     public void delete(final @PathParam("amendmentContainerID") String amendmentContainerID) {
-        final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByAmendmentContainerID(amendmentContainerID);
-        for (final AmendmentContainer container : amendmentContainers) {
-            if (container != null) {
-                amendmentContainerRepository.delete(container);
+        final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByAmendmentContainerIDOrderByCreationDateDesc(amendmentContainerID);
+        if (amendmentContainers != null) {
+            for (final AmendmentContainer amendmentContainer : amendmentContainers) {
+                if (amendmentContainer != null) {
+                    amendmentContainerRepository.delete(amendmentContainer);
+                }
             }
         }
+    }
+
+    @POST
+    @Path("/status/{revisionID}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional()
+    @Override
+    public String updateStatus(@PathParam("revisionID") String revisionID, @QueryParam("status") String newStatus) throws StaleResourceException, ResourceNotFoundException {
+        final AmendmentContainer amendmentContainer = amendmentContainerRepository.findByRevisionID(revisionID);
+        if (amendmentContainer != null) {
+            if (newStatus != null) {
+                if (amendmentContainer.isLatestRevision()) {
+                    amendmentContainer.setAmendmentContainerStatus(newStatus);
+                    amendmentContainerRepository.save(amendmentContainer);
+                } else {
+                    throw new StaleResourceException("Stale resource detected; given revisionID is " + revisionID + ", latest revision in database is " + amendmentContainer.getRevisionID());
+                }
+            }
+            return amendmentContainer.getAmendmentContainerStatus();
+        }
+        throw new ResourceNotFoundException("No amendment with revision " + revisionID + " found.");
     }
 
     private Map<String, Object> getConvertors() {

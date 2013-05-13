@@ -36,6 +36,14 @@ public class AmendmentContainer {
     private Person person;
 
     /**
+     * Flag to keep track of the latest revision - significantly speeds up certain operations.
+     */
+    private boolean latestRevision;
+
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private AmendmentContainer previousAmendmentContainer;
+
+    /**
      * A revision key that identifies all amendment revisions for a single, logical amendment.
      */
     @Column(nullable = false, length = 64)
@@ -222,5 +230,25 @@ public class AmendmentContainer {
 
     public void setPerson(Person creator) {
         this.person = creator;
+    }
+
+    public boolean isLatestRevision() {
+        return latestRevision;
+    }
+
+    public void setLatestRevision(boolean latestRevision) {
+        this.latestRevision = latestRevision;
+    }
+
+    public AmendmentContainer getPreviousAmendmentContainer() {
+        return previousAmendmentContainer;
+    }
+
+    public void setPreviousAmendmentContainer(AmendmentContainer previousAmendmentContainer) {
+        this.previousAmendmentContainer = previousAmendmentContainer;
+    }
+
+    public void setTargetReferences(List<AmendableWidgetReference> targetReferences) {
+        this.targetReferences = targetReferences;
     }
 }
