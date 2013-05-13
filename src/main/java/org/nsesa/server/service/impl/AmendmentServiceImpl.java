@@ -9,6 +9,9 @@ import org.nsesa.server.domain.AmendmentContainer;
 import org.nsesa.server.domain.Document;
 import org.nsesa.server.domain.Person;
 import org.nsesa.server.dto.AmendmentContainerDTO;
+import org.nsesa.server.exception.ResourceNotFoundException;
+import org.nsesa.server.exception.StaleResourceException;
+import org.nsesa.server.exception.ValidationException;
 import org.nsesa.server.repository.AmendmentContainerRepository;
 import org.nsesa.server.repository.DocumentRepository;
 import org.nsesa.server.repository.PersonRepository;
@@ -140,7 +143,7 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Transactional()
     @Override
-    public AmendmentContainerDTO save(final AmendmentContainerDTO amendmentContainerDTO) {
+    public AmendmentContainerDTO save(final AmendmentContainerDTO amendmentContainerDTO) throws StaleResourceException, ResourceNotFoundException, ValidationException {
         // see if we already have an existing amendment under this revision
         final List<AmendmentContainer> existing = amendmentContainerRepository.findByAmendmentContainerIDOrderByCreationDateDesc(amendmentContainerDTO.getAmendmentContainerID(), new PageRequest(0, 1));
         if (existing != null && !existing.isEmpty()) {
@@ -150,7 +153,7 @@ public class AmendmentServiceImpl implements AmendmentService {
                 amendmentContainerDTO.setRevisionID(UUID.randomUUID().toString());
             } else {
                 // todo stale resource
-                throw new RuntimeException("Stale resource detected; given revisionID is " + amendmentContainerDTO.getRevisionID() + ", latest revision in database is " + existing.get(0).getRevisionID());
+                throw new StaleResourceException("Stale resource detected; given revisionID is " + amendmentContainerDTO.getRevisionID() + ", latest revision in database is " + existing.get(0).getRevisionID());
             }
         }
 
