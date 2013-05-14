@@ -22,13 +22,13 @@ public class Person {
     /**
      * The username of this person.
      */
-    @Column(length = 32)
+    @Column(length = 64)
     private String username;
 
     /**
      * The first name of this person.
      */
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false, length = 64)
     private String name;
 
     /**
