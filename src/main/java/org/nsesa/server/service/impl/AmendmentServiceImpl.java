@@ -9,6 +9,8 @@ import org.nsesa.server.domain.AmendmentContainer;
 import org.nsesa.server.domain.Document;
 import org.nsesa.server.domain.Person;
 import org.nsesa.server.dto.AmendmentContainerDTO;
+import org.nsesa.server.dto.PersonDTO;
+import org.nsesa.server.dto.RevisionDTO;
 import org.nsesa.server.exception.ResourceNotFoundException;
 import org.nsesa.server.exception.StaleResourceException;
 import org.nsesa.server.exception.ValidationException;
@@ -57,6 +59,7 @@ public class AmendmentServiceImpl implements AmendmentService {
     ValueConverter amendmentActionConvertor;
 
     private final Assembler amendmentContainerAssembler = DTOAssembler.newAssembler(AmendmentContainerDTO.class, AmendmentContainer.class);
+    private final Assembler personAssembler = DTOAssembler.newAssembler(PersonDTO.class, Person.class);
 
     @GET
     @Path("/document/{documentID}/{personID}")
@@ -128,11 +131,19 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
     @Transactional(readOnly = true)
     @Override
-    public List<String> getAmendmentContainerVersions(@PathParam("amendmentContainerID") String amendmentContainerID) {
+    public List<RevisionDTO> getAmendmentContainerVersions(@PathParam("amendmentContainerID") String amendmentContainerID) {
         final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByAmendmentContainerIDOrderByCreationDateDesc(amendmentContainerID);
-        final List<String> revisionIDs = new ArrayList<String>();
+        final List<RevisionDTO> revisionIDs = new ArrayList<RevisionDTO>();
         for (final AmendmentContainer amendmentContainer : amendmentContainers) {
-            revisionIDs.add(amendmentContainer.getRevisionID());
+            PersonDTO person = new PersonDTO();
+            personAssembler.assembleDto(person, amendmentContainer.getPerson(), getConvertors(), new DefaultDSLRegistry());
+            RevisionDTO revision = new RevisionDTO(
+                    person,
+                    new Date(amendmentContainer.getCreationDate().getTime().getTime()),
+                    amendmentContainer.getModificationDate() != null ? new Date(amendmentContainer.getModificationDate().getTime().getTime()) : null,
+                    amendmentContainer.getRevisionID()
+            );
+            revisionIDs.add(revision);
         }
         return revisionIDs;
     }
