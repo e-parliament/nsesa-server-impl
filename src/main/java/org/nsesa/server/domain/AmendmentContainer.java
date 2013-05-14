@@ -19,6 +19,9 @@ public class AmendmentContainer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
 
+    /**
+     * The public identifier for a logical amendment - this constant among all its revisions.
+     */
     @Column(nullable = false, length = 64)
     private String amendmentContainerID;
 
@@ -44,9 +47,9 @@ public class AmendmentContainer {
     private AmendmentContainer previousAmendmentContainer;
 
     /**
-     * A revision key that identifies all amendment revisions for a single, logical amendment.
+     * A revision key that uniquely identifies this amendment revision.
      */
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 64, unique = true)
     private String revisionID;
 
     /**
