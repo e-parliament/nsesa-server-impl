@@ -28,11 +28,11 @@ public class AmendmentContainer {
     @ManyToOne(optional = false)
     private Document document;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Calendar creationDate;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar modificationDate;
 
     @ManyToOne(optional = false)

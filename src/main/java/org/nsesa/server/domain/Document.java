@@ -23,11 +23,11 @@ public class Document {
     @Column(nullable = false, length = 64)
     private String documentID;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Calendar creationDate;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar modificationDate;
 
     /**
@@ -50,7 +50,7 @@ public class Document {
     /**
      * The deadline for this document.
      */
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar deadline;
 
     public Document() {
