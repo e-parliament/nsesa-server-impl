@@ -107,11 +107,7 @@ public class DocumentContentServiceImpl implements DocumentContentService {
                     documentContent = new DocumentContent();
                     documentContent.setDocumentID(documentID);
                     documentContent.setContent(content);
-                    try {
-                        documentContentRepository.save(documentContent);
-                    } catch(Exception e) {
-                        e.printStackTrace();
-                    }
+                    documentContentRepository.save(documentContent);
 
                 }
             }
