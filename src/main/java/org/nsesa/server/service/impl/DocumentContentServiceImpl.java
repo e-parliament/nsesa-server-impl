@@ -21,11 +21,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.net.ssl.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +59,8 @@ public class DocumentContentServiceImpl implements DocumentContentService {
     Map<String, Resource> documents;
 
     final Assembler documentContentAssembler = DTOAssembler.newAssembler(DocumentContentDTO.class, DocumentContent.class);
+
+    private boolean installedTrustedCertificate;
 
     @Transactional()
     public void init() {
@@ -78,13 +89,17 @@ public class DocumentContentServiceImpl implements DocumentContentService {
         DocumentContent documentContent = documentContentRepository.findByDocumentID(documentID);
 
         if (documentContent == null) {
-            if (documentID.startsWith("http://")) {
+            if (documentID.startsWith("http://") || documentID.startsWith("https://")) {
                 // assume we're retrieving a remote document
                 String content = null;
                 try {
-                    content = Resources.toString(new URL(documentID), Charset.forName("UTF-8"));
+                    if (documentID.startsWith("https://")) {
+                        installTrustedCertificateIfNecessary();
+                    }
+                    URL url = new URL(documentID);
+                    content = Resources.toString(url, Charset.forName("UTF-8"));
                 } catch (IOException e) {
-                    LOG.error("Could not read document from URL {}", documentID);
+                    LOG.error("Could not read document from URL {}", documentID, e);
                     throw new RuntimeException("Could not read document content.");
                 }
                 if (content != null) {
@@ -92,7 +107,12 @@ public class DocumentContentServiceImpl implements DocumentContentService {
                     documentContent = new DocumentContent();
                     documentContent.setDocumentID(documentID);
                     documentContent.setContent(content);
-                    documentContentRepository.save(documentContent);
+                    try {
+                        documentContentRepository.save(documentContent);
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         }
@@ -102,6 +122,47 @@ public class DocumentContentServiceImpl implements DocumentContentService {
             return dto;
         }
         return null;
+    }
+
+    /**
+     * Install a trusted manager to bypass all https certificates
+     */
+    private void installTrustedCertificateIfNecessary() {
+        if (installedTrustedCertificate) {
+            return;
+        }
+        try {
+            //create a simple trust
+            TrustManager trm = new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+                }
+                @Override
+                public void checkServerTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+                }
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+            };
+            SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, new TrustManager[]{trm}, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String s, SSLSession sslSession) {
+                    return true;
+                }
+            });
+        } catch (NoSuchAlgorithmException e) {
+            LOG.error("No SSL algorithm", e);
+            throw new RuntimeException("No SSL algorithm can be set up", e);
+        } catch (KeyManagementException e) {
+            LOG.error("No Key algorithm", e);
+            throw new RuntimeException("No Key management algorithm can be set up", e);
+        } finally {
+            installedTrustedCertificate = true;
+        }
     }
 
     @POST

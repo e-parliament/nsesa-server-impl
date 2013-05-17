@@ -54,7 +54,7 @@ public class DocumentServiceImpl implements DocumentService {
             document.setLanguageIso("EN");
             document.setDocumentID(documentID);
             String documentName = "Document " + documentID;
-            if (documentID.startsWith("http://")) {
+            if (documentID.startsWith("http://") || documentID.startsWith("https://")) {
                 // loading a remote document
                 documentName = "Document " + documentID.substring(documentID.lastIndexOf("/") + 1);
             }
