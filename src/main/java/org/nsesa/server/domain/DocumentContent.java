@@ -19,7 +19,7 @@ public class DocumentContent {
     /**
      * public key.
      */
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 512)
     private String documentID;
 
     /**
