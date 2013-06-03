@@ -17,9 +17,13 @@ import java.util.List;
 @Repository
 public interface AmendmentContainerRepository extends PagingAndSortingRepository<AmendmentContainer, Long> {
 
-    List<AmendmentContainer> findByDocumentAndPerson(Document document, Person person);
+    List<AmendmentContainer> findByDocumentAndPersonAndLatestRevision(Document document, Person person, Boolean latestRevision);
+
+    List<AmendmentContainer> findByAmendmentContainerIDOrderByCreationDateDesc(String amendmentContainerID);
 
     List<AmendmentContainer> findByDocument(Document document);
 
-    AmendmentContainer findByAmendmentContainerID(String amendmentContainerID);
+    AmendmentContainer findByRevisionID(String revisionID);
+
+    AmendmentContainer findByAmendmentContainerIDAndLatestRevision(String amendmentContainerID, Boolean latestRevision);
 }

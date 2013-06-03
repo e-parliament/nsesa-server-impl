@@ -9,26 +9,32 @@ import javax.persistence.*;
  * @version $Id$
  */
 @Entity
+@Table(name = "person")
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
 
+    @Column(nullable = false, length = 64)
     private String personID;
 
     /**
      * The username of this person.
      */
+    @Column(length = 64)
     private String username;
+
     /**
      * The first name of this person.
      */
+    @Column(nullable = false, length = 64)
     private String name;
 
     /**
      * The family name of this person.
      */
+    @Column(nullable = false, length = 64)
     private String lastName;
 
     public Person() {

@@ -8,7 +8,7 @@
     <artifactId>server-demo-impl</artifactId>
     <packaging>war</packaging>
     <name>Server Impl</name>
-    <version>0.2</version>
+    <version>0.3</version>
 
     <repositories>
         <repository>
@@ -42,10 +42,11 @@
     </properties>
 
     <dependencies>
+        <!-- AN editor -->
         <dependency>
             <groupId>org.nsesa</groupId>
             <artifactId>nsesa-server-api</artifactId>
-            <version>0.2</version>
+            <version>0.3</version>
         </dependency>
 
         <!--Spring-->
@@ -99,6 +100,25 @@
             <version>1.3.170</version>
         </dependency>
 
+        <!-- Postgresql -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901.jdbc4</version>
+        </dependency>
+
+        <!-- MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.24</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5-pre1</version>
+        </dependency>
 
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
@@ -282,14 +302,6 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
-            <resource>
-                <directory>src/main/resources/examples</directory>
-                <includes>
-                    <include>**/*.java</include>
-                    <include>**/*.xml</include>
-                    <include>**/*.properties</include>
-                </includes>
-            </resource>
 
         </resources>
         <plugins>
@@ -325,6 +337,26 @@
                             <filtering>true</filtering>
                         </resource>
                     </webResources>
+                </configuration>
+            </plugin>
+
+            <!-- ***************************** Jetty plugin    ***************************** -->
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.26</version>
+                <configuration>
+                    <webAppSourceDirectory>web</webAppSourceDirectory>
+                    <contextPath>/services</contextPath>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>9090</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <stopKey>NsesaServer</stopKey>
+                    <stopPort>9813</stopPort>
                 </configuration>
             </plugin>
         </plugins>

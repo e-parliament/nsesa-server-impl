@@ -17,8 +17,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * A reference to find the correct
- * widget to amend, and used when passing information when creating a new element.
+ * A reference to find the correct widget to amend, and used when passing information when creating a new element.
  * <p/>
  * Date: 10/07/12 22:34
  *
@@ -26,6 +25,7 @@ import java.io.Serializable;
  * @version $Id$
  */
 @Entity
+@Table(name = "reference")
 public class AmendableWidgetReference implements Serializable {
 
     @Id
@@ -35,6 +35,7 @@ public class AmendableWidgetReference implements Serializable {
     /**
      * public primary key
      */
+    @Column(name = "ref_id", length = 64, nullable = false)
     private String referenceID;
     /**
      * Boolean flag to see if the reference requires the creation of a new element before injecting
@@ -48,21 +49,25 @@ public class AmendableWidgetReference implements Serializable {
     /**
      * The namespace URI, if any.
      */
+    @Column(name = "ref_ns", length = 255, nullable = false)
     private String namespaceURI;
 
     /**
-     * The path to the matching node (usually XPath-like, see {@link org.nsesa.editor.gwt.core.client.util.OverlayUtil#xpath(String, org.nsesa.editor.gwt.core.client.ui.overlay.document.OverlayWidget)}
+     * The path to the matching node (usually XPath-like).
      */
+    @Column(name = "ref_path", length = 255, nullable = false)
     private String path;
 
     /**
      * The type name of the widget to create.
      */
+    @Column(name = "ref_type", length = 50, nullable = false)
     private String type;
 
     /**
-     * The offset at which to create this widget under the parent {@link org.nsesa.editor.gwt.core.client.ui.overlay.document.OverlayWidget}
+     * The offset at which to create this widget under the parent overlay widget.
      */
+    @Column(name = "ref_offset", length = 3)
     private int offset;
 
     public AmendableWidgetReference() {

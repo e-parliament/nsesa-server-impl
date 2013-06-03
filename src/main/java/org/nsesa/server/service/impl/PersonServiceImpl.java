@@ -9,8 +9,8 @@ import org.nsesa.server.dto.PersonDTO;
 import org.nsesa.server.repository.PersonRepository;
 import org.nsesa.server.service.api.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -37,6 +37,7 @@ public class PersonServiceImpl implements PersonService {
     @GET
     @Path("/id/{personID}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional
     @Override
     public PersonDTO getPerson(@PathParam("personID") String personID) {
 
@@ -53,6 +54,7 @@ public class PersonServiceImpl implements PersonService {
     @GET
     @Path("/username/{username}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional
     @Override
     public PersonDTO getPersonByUsername(@PathParam("username") String username) {
         Person person = personRepository.findByUsername(username);
@@ -68,6 +70,7 @@ public class PersonServiceImpl implements PersonService {
     @POST
     @Path("/create")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional()
     @Override
     public void save(PersonDTO personDTO) {
         Person person = new Person();

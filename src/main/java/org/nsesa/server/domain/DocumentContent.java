@@ -1,7 +1,6 @@
 package org.nsesa.server.domain;
 
 import javax.persistence.*;
-import java.util.Calendar;
 
 /**
  * Date: 12/03/13 11:53
@@ -10,6 +9,7 @@ import java.util.Calendar;
  * @version $Id$
  */
 @Entity
+@Table(name = "content")
 public class DocumentContent {
 
     @Id
@@ -19,12 +19,13 @@ public class DocumentContent {
     /**
      * public key.
      */
+    @Column(nullable = false, length = 512)
     private String documentID;
 
     /**
      * XML content.
      */
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     public DocumentContent() {

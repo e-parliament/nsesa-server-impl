@@ -1,8 +1,5 @@
 package org.nsesa.server.domain;
 
-import com.inspiresoftware.lib.dto.geda.annotations.Dto;
-import com.inspiresoftware.lib.dto.geda.annotations.DtoField;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,57 +12,75 @@ import java.util.List;
  * @version $Id$
  */
 @Entity
+@Table(name = "amendment")
 public class AmendmentContainer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
 
+    /**
+     * The public identifier for a logical amendment - this constant among all its revisions.
+     */
+    @Column(nullable = false, length = 64)
     private String amendmentContainerID;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Document document;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Calendar creationDate;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar modificationDate;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Person person;
 
     /**
-     * A revision key that identifies all amendment revisions for a single, logical amendment.
+     * Flag to keep track of the latest revision - significantly speeds up certain operations.
      */
+    private boolean latestRevision;
+
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    private AmendmentContainer previousAmendmentContainer;
+
+    /**
+     * A revision key that uniquely identifies this amendment revision.
+     */
+    @Column(nullable = false, length = 64, unique = true)
     private String revisionID;
 
     /**
      * The two letter ISO code of the (primary) language this amendment is created in.
      */
+    @Column(nullable = false, length = 2)
     private String languageISO;
 
     /**
      * The type of action of this amendment (modification, deletion, creation, move, ...)
      */
+    @Enumerated(EnumType.STRING)
     private AmendmentAction amendmentAction;
 
     /**
      * The status of an amendment. The initial status of an amendment is 'candidate'. Left as a String for
      * easier extension.
      */
+    @Column(nullable = false, length = 32)
     private String amendmentContainerStatus = "candidate";
 
     /**
      * The serialized body/payload of this amendment. Can be XML or JSON, depending on what your backend provides.
      */
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String body;
 
     /**
      * A reference to the source of this this amendment (meaning, the place where the amendment should be injected upon)
      */
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
     private AmendableWidgetReference sourceReference;
 
     /**
@@ -75,7 +90,7 @@ public class AmendmentContainer {
      * <p/>
      * TODO the target references are not yet supported
      */
-    @Transient
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<AmendableWidgetReference> targetReferences = new ArrayList<AmendableWidgetReference>();
 
     public AmendmentContainer() {
@@ -218,5 +233,25 @@ public class AmendmentContainer {
 
     public void setPerson(Person creator) {
         this.person = creator;
+    }
+
+    public boolean isLatestRevision() {
+        return latestRevision;
+    }
+
+    public void setLatestRevision(boolean latestRevision) {
+        this.latestRevision = latestRevision;
+    }
+
+    public AmendmentContainer getPreviousAmendmentContainer() {
+        return previousAmendmentContainer;
+    }
+
+    public void setPreviousAmendmentContainer(AmendmentContainer previousAmendmentContainer) {
+        this.previousAmendmentContainer = previousAmendmentContainer;
+    }
+
+    public void setTargetReferences(List<AmendableWidgetReference> targetReferences) {
+        this.targetReferences = targetReferences;
     }
 }

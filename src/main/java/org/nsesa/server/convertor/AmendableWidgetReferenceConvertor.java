@@ -4,6 +4,7 @@ import com.inspiresoftware.lib.dto.geda.adapter.BeanFactory;
 import com.inspiresoftware.lib.dto.geda.adapter.ValueConverter;
 import org.nsesa.server.domain.AmendableWidgetReference;
 import org.nsesa.server.domain.AmendmentContainer;
+import org.nsesa.server.dto.AmendableWidgetReferenceDTO;
 import org.nsesa.server.repository.AmendableWidgetReferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -30,7 +31,7 @@ public class AmendableWidgetReferenceConvertor implements ValueConverter {
         final AmendmentContainer amendmentContainer = (AmendmentContainer) object;
         if (amendmentContainer.getSourceReference() != null) {
             // create DTO
-            org.nsesa.server.dto.AmendableWidgetReference dto = new org.nsesa.server.dto.AmendableWidgetReference();
+            AmendableWidgetReferenceDTO dto = new AmendableWidgetReferenceDTO();
             dto.setPath(amendmentContainer.getSourceReference().getPath());
             dto.setCreation(amendmentContainer.getSourceReference().isCreation());
             dto.setNamespaceURI(amendmentContainer.getSourceReference().getNamespaceURI());
@@ -47,7 +48,7 @@ public class AmendableWidgetReferenceConvertor implements ValueConverter {
     public Object convertToEntity(Object object, Object oldEntity, BeanFactory beanFactory) {
 
         if (object == null) return null;
-        org.nsesa.server.dto.AmendableWidgetReference dto = (org.nsesa.server.dto.AmendableWidgetReference) object;
+        AmendableWidgetReferenceDTO dto = (AmendableWidgetReferenceDTO) object;
         AmendableWidgetReference amendableWidgetReference = amendableWidgetReferenceRepository.findByReferenceID(dto.getReferenceID());
         if (amendableWidgetReference == null) amendableWidgetReference = new AmendableWidgetReference();
 
@@ -60,7 +61,7 @@ public class AmendableWidgetReferenceConvertor implements ValueConverter {
         amendableWidgetReference.setReferenceID(dto.getReferenceID());
 
         if (oldEntity instanceof AmendmentContainer) {
-            ((AmendmentContainer)oldEntity).setSourceReference(amendableWidgetReference);
+            ((AmendmentContainer) oldEntity).setSourceReference(amendableWidgetReference);
         }
         return amendableWidgetReference;
     }
