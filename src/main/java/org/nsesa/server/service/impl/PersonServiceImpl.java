@@ -9,14 +9,14 @@ import org.nsesa.server.dto.PersonDTO;
 import org.nsesa.server.repository.PersonRepository;
 import org.nsesa.server.service.api.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Date: 11/03/13 15:52
@@ -33,6 +33,17 @@ public class PersonServiceImpl implements PersonService {
     PersonRepository personRepository;
 
     private final Assembler personAssembler = DTOAssembler.newAssembler(PersonDTO.class, Person.class);
+
+    @PostConstruct
+    void init() {
+        for (int i = 0; i < 10; i++) {
+            Person byUsername = personRepository.findByUsername("mep" + i);
+            if (byUsername == null) {
+                byUsername = new Person("personID" + i, "mep" + i, "Mep " + i, "MEP");
+                personRepository.save(byUsername);
+            }
+        }
+    }
 
     @GET
     @Path("/id/{personID}")
@@ -65,6 +76,22 @@ public class PersonServiceImpl implements PersonService {
         PersonDTO personDTO = new PersonDTO();
         personAssembler.assembleDto(personDTO, person, getConvertors(), new DefaultDSLRegistry());
         return personDTO;
+    }
+
+    @GET
+    @Path("/query")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional(readOnly = true)
+    @Override
+    public List<PersonDTO> getPersons(@QueryParam("q") String personQuery,
+                                      @QueryParam("start") @DefaultValue("0") int start,
+                                      @QueryParam("limit") @DefaultValue("20") int limit) {
+        if (personQuery == null || "".equalsIgnoreCase(personQuery.trim())) return null;
+
+        List<PersonDTO> personDTOs = new ArrayList<PersonDTO>();
+        final List<Person> persons = personRepository.findByLastNameLikeOrderByLastNameDesc(personQuery.toLowerCase(), new PageRequest(start, limit));
+        personAssembler.assembleDtos(personDTOs, persons, getConvertors(), new DefaultDSLRegistry());
+        return personDTOs;
     }
 
     @POST
