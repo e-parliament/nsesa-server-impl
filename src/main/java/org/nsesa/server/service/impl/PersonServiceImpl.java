@@ -36,10 +36,10 @@ public class PersonServiceImpl implements PersonService {
 
     @PostConstruct
     void init() {
-        for (int i = 0; i < 10; i++) {
-            Person byUsername = personRepository.findByUsername("mep" + i);
+        for (int i = 1; i < 11; i++) {
+            Person byUsername = personRepository.findByUsername("mp" + i);
             if (byUsername == null) {
-                byUsername = new Person("personID" + i, "mep" + i, "Mep " + i, "MEP");
+                byUsername = new Person("personID" + i, "mp" + i, "MP " + i, "MP");
                 personRepository.save(byUsername);
             }
         }
