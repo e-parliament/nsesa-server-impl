@@ -80,7 +80,7 @@ public class AmendmentContainer {
     /**
      * A reference to the source of this this amendment (meaning, the place where the amendment should be injected upon)
      */
-    @ManyToOne(cascade = {CascadeType.ALL}, optional = false)
+    @OneToOne(cascade = {CascadeType.ALL}, optional = false)
     private AmendableWidgetReference sourceReference;
 
     /**
