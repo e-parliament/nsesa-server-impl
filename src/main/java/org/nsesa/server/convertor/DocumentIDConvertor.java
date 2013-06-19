@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 /**
  * Date: 13/03/13 14:35
  *
- * @author <a href="philip.luppens@gmail.com">Philip Luppens</a>
+ * @author <a href="mailto:philip.luppens@gmail.com">Philip Luppens</a>
  * @version $Id$
  */
 @Component("documentIDConvertor")
