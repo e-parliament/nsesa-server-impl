@@ -68,7 +68,7 @@ public class AmendableWidgetReference implements Serializable {
      * The offset at which to create this widget under the parent overlay widget.
      */
     @Column(name = "ref_offset", length = 3)
-    private int offset;
+    private Integer offset;
 
     public AmendableWidgetReference() {
 
@@ -83,7 +83,7 @@ public class AmendableWidgetReference implements Serializable {
         this.namespaceURI = namespaceURI;
     }
 
-    public AmendableWidgetReference(boolean creation, boolean sibling, String path, String type, int offset) {
+    public AmendableWidgetReference(boolean creation, boolean sibling, String path, String type, Integer offset) {
         this.creation = creation;
         this.sibling = sibling;
         this.path = path;
@@ -91,7 +91,7 @@ public class AmendableWidgetReference implements Serializable {
         this.offset = offset;
     }
 
-    public AmendableWidgetReference(boolean creation, boolean sibling, String namespaceURI, String path, String type, int offset) {
+    public AmendableWidgetReference(boolean creation, boolean sibling, String namespaceURI, String path, String type, Integer offset) {
         this.creation = creation;
         this.sibling = sibling;
         this.namespaceURI = namespaceURI;
@@ -116,11 +116,11 @@ public class AmendableWidgetReference implements Serializable {
         this.creation = creation;
     }
 
-    public int getOffset() {
+    public Integer getOffset() {
         return offset;
     }
 
-    public void setOffset(int offset) {
+    public void setOffset(Integer offset) {
         this.offset = offset;
     }
 
