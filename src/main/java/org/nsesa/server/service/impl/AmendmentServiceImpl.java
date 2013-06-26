@@ -5,6 +5,7 @@ import com.inspiresoftware.lib.dto.geda.assembler.Assembler;
 import com.inspiresoftware.lib.dto.geda.assembler.DTOAssembler;
 import com.inspiresoftware.lib.dto.geda.assembler.dsl.impl.DefaultDSLRegistry;
 import org.apache.cxf.annotations.GZIP;
+import org.nsesa.server.domain.AmendableWidgetReference;
 import org.nsesa.server.domain.AmendmentContainer;
 import org.nsesa.server.domain.Document;
 import org.nsesa.server.domain.Person;
@@ -29,7 +30,7 @@ import java.util.*;
 /**
  * Date: 11/03/13 15:52
  *
- * @author <a href="philip.luppens@gmail.com">Philip Luppens</a>
+ * @author <a href="mailto:philip.luppens@gmail.com">Philip Luppens</a>
  * @version $Id$
  */
 @WebService(endpointInterface = "org.nsesa.server.service.api.AmendmentService", serviceName = "AmendmentService")
@@ -157,6 +158,12 @@ public class AmendmentServiceImpl implements AmendmentService {
         // see if we already have an existing amendment under this revision
         final AmendmentContainer previous = amendmentContainerRepository.findByAmendmentContainerIDAndLatestRevision(amendmentContainerDTO.getAmendmentContainerID(), true);
         AmendmentContainer amendmentContainer = new AmendmentContainer();
+        // force the source reference to be new
+        amendmentContainerDTO.getSourceReference().setReferenceID(UUID.randomUUID().toString());
+        for (AmendableWidgetReference targetReference : amendmentContainer.getTargetReferences()) {
+            targetReference.setReferenceID(UUID.randomUUID().toString());
+        }
+
         amendmentContainerAssembler.assembleEntity(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
 
         if (previous != null) {

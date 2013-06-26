@@ -6,7 +6,7 @@ import java.util.Calendar;
 /**
  * Date: 12/03/13 11:53
  *
- * @author <a href="philip.luppens@gmail.com">Philip Luppens</a>
+ * @author <a href="mailto:philip.luppens@gmail.com">Philip Luppens</a>
  * @version $Id$
  */
 @Entity
