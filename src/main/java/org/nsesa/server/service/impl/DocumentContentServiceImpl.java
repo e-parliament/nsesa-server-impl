@@ -2,11 +2,13 @@ package org.nsesa.server.service.impl;
 
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
+import com.inspiresoftware.lib.dto.geda.adapter.ValueConverter;
 import com.inspiresoftware.lib.dto.geda.assembler.Assembler;
 import com.inspiresoftware.lib.dto.geda.assembler.DTOAssembler;
 import com.inspiresoftware.lib.dto.geda.assembler.dsl.impl.DefaultDSLRegistry;
 import org.apache.cxf.annotations.GZIP;
 import org.nsesa.server.domain.DocumentContent;
+import org.nsesa.server.domain.DocumentContentType;
 import org.nsesa.server.dto.DocumentContentDTO;
 import org.nsesa.server.repository.DocumentContentRepository;
 import org.nsesa.server.service.api.DocumentContentService;
@@ -24,10 +26,8 @@ import javax.jws.WebService;
 import javax.net.ssl.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.security.KeyManagementException;
@@ -56,6 +56,9 @@ public class DocumentContentServiceImpl implements DocumentContentService {
     @Autowired
     DocumentContentRepository documentContentRepository;
 
+    @Autowired
+    ValueConverter documentContentTypeConvertor;
+
     Map<String, Resource> documents;
 
     final Assembler documentContentAssembler = DTOAssembler.newAssembler(DocumentContentDTO.class, DocumentContent.class);
@@ -67,13 +70,22 @@ public class DocumentContentServiceImpl implements DocumentContentService {
         // initialize data
         for (Map.Entry<String, Resource> entry : documents.entrySet()) {
             try {
-                final String content = Files.toString(entry.getValue().getFile(), Charset.forName("UTF-8"));
-                DocumentContent documentContent = documentContentRepository.findByDocumentID(entry.getKey());
-                if (documentContent == null) documentContent = new DocumentContent();
-                documentContent.setContent(content);
-                documentContent.setDocumentID(entry.getKey());
-                documentContentRepository.save(documentContent);
-                LOG.info("Initialized document {} into content repository.", entry.getKey());
+                final File file = entry.getValue().getFile();
+                if (file.exists() && file.canRead()) {
+                    final String content = Files.toString(file, Charset.forName("UTF-8"));
+                    DocumentContent documentContent = documentContentRepository.findByDocumentID(entry.getKey());
+                    if (documentContent == null) documentContent = new DocumentContent();
+                    documentContent.setContent(content);
+                    documentContent.setDocumentID(entry.getKey());
+
+                    // quick check for the content type to expect
+                    if (file.getName().endsWith(".txt")) {
+                        // assume plaintext
+                        documentContent.setDocumentContentType(DocumentContentType.PLAIN);
+                    }
+                    documentContentRepository.save(documentContent);
+                    LOG.info("Initialized document {} into content repository.", entry.getKey());
+                }
             } catch (IOException e) {
                 LOG.error("Could not import document " + entry.getKey(), e);
             }
@@ -133,9 +145,11 @@ public class DocumentContentServiceImpl implements DocumentContentService {
                 @Override
                 public void checkClientTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
                 }
+
                 @Override
                 public void checkServerTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
                 }
+
                 @Override
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
@@ -198,7 +212,11 @@ public class DocumentContentServiceImpl implements DocumentContentService {
     }
 
     private Map<String, Object> getConvertors() {
-        return new HashMap<String, Object>();
+        return new HashMap<String, Object>() {
+            {
+                put("documentContentTypeConvertor", documentContentTypeConvertor);
+            }
+        };
     }
 
     // Spring setter ---------------------

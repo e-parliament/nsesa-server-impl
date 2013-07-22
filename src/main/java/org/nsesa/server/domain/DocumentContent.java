@@ -28,6 +28,10 @@ public class DocumentContent {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false, length = 10, name = "content_type")
+    private DocumentContentType documentContentType = DocumentContentType.XML;
+
     public DocumentContent() {
     }
 
@@ -53,5 +57,13 @@ public class DocumentContent {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public DocumentContentType getDocumentContentType() {
+        return documentContentType;
+    }
+
+    public void setDocumentContentType(DocumentContentType documentContentType) {
+        this.documentContentType = documentContentType;
     }
 }
