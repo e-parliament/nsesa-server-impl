@@ -76,7 +76,6 @@ public class DocumentServiceImpl implements DocumentService {
         Document document = documentRepository.findByDocumentID(documentDTO.getDocumentID());
         if (document == null) document = new Document();
         documentAssembler.assembleEntity(documentDTO, document, getConvertors(), new DefaultDSLRegistry());
-        document = fromDocumentDTO(documentDTO);
         documentRepository.save(document);
         // since there might be changes (lock version, last modification date, etc ...)
         documentAssembler.assembleDto(documentDTO, document, getConvertors(), new DefaultDSLRegistry());
@@ -105,16 +104,6 @@ public class DocumentServiceImpl implements DocumentService {
     public List<DocumentDTO> getRelatedDocuments(@WebParam(name = "documentID") String documentID) {
         // TODO
         return new ArrayList<DocumentDTO>();
-    }
-
-    private Document fromDocumentDTO(DocumentDTO documentDTO) {
-        Document document = new Document();
-        document.setDocumentID(documentDTO.getDocumentID());
-        document.setName(documentDTO.getName());
-        document.setLanguageIso(documentDTO.getLanguageIso());
-        document.setAmendable(documentDTO.isAmendable());
-        document.setDeadline(documentDTO.getDeadline());
-        return document;
     }
 
     private Map<String, Object> getConvertors() {
