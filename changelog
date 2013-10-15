@@ -1,0 +1,4 @@
+Release 0.4 (26-Jun-2013)
+
+- Corrected persistence of the amendment reference which was not creating a new reference for new versions (resulting in problems when deleting an amendment)
+- Added a simple implementation to retrieve authors by their last name

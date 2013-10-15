@@ -8,7 +8,7 @@
     <artifactId>server-demo-impl</artifactId>
     <packaging>war</packaging>
     <name>Server Impl</name>
-    <version>0.4</version>
+    <version>0.5</version>
 
     <repositories>
         <repository>
@@ -46,7 +46,7 @@
         <dependency>
             <groupId>org.nsesa</groupId>
             <artifactId>nsesa-server-api</artifactId>
-            <version>0.4</version>
+            <version>0.5</version>
         </dependency>
 
         <!--Spring-->

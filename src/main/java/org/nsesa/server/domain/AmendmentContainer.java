@@ -46,6 +46,10 @@ public class AmendmentContainer {
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private AmendmentContainer previousAmendmentContainer;
 
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent")
+    private AmendmentContainer parentAmendmentContainer;
+
     /**
      * A revision key that uniquely identifies this amendment revision.
      */
@@ -92,6 +96,13 @@ public class AmendmentContainer {
      */
     @OneToMany(cascade = {CascadeType.ALL})
     private List<AmendableWidgetReference> targetReferences = new ArrayList<AmendableWidgetReference>();
+
+    /**
+     * A list of bundled amendment containers
+     */
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "amendment_bundles")
+    private List<String> bundledAmendmentContainers = new ArrayList<String>();
 
     public AmendmentContainer() {
     }
@@ -253,5 +264,21 @@ public class AmendmentContainer {
 
     public void setTargetReferences(List<AmendableWidgetReference> targetReferences) {
         this.targetReferences = targetReferences;
+    }
+
+    public AmendmentContainer getParentAmendmentContainer() {
+        return parentAmendmentContainer;
+    }
+
+    public void setParentAmendmentContainer(AmendmentContainer parentAmendmentContainer) {
+        this.parentAmendmentContainer = parentAmendmentContainer;
+    }
+
+    public List<String> getBundledAmendmentContainers() {
+        return bundledAmendmentContainers;
+    }
+
+    public void setBundledAmendmentContainers(List<String> bundledAmendmentContainers) {
+        this.bundledAmendmentContainers = bundledAmendmentContainers;
     }
 }

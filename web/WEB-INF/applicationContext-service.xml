@@ -5,7 +5,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="documentService" class="org.nsesa.server.service.impl.DocumentServiceImpl"/>
-    <bean id="documentContentService" class="org.nsesa.server.service.impl.DocumentContentServiceImpl" init-method="init">
+    <bean id="documentContentService" class="org.nsesa.server.service.impl.DocumentContentServiceImpl"
+          init-method="init">
         <property name="documents">
             <map>
                 <entry key="1" value="classpath:examples/DDLPRES_256.akn"/>
@@ -23,6 +24,9 @@
                 <entry key="13" value="classpath:examples/PE486.060_report_v2-00.xml"/>
                 <entry key="14" value="classpath:examples/PE486.060_resolution_v1-00.xml"/>
                 <entry key="template-1" value="classpath:examples/drafting_template.xml"/>
+
+                <entry key="BILLS-112hconres83eh" value="classpath:examples/BILLS-112hconres83eh.txt"/>
+                <entry key="BILLS-112hr4310enr" value="classpath:examples/BILLS-112hr4310enr.txt"/>
             </map>
         </property>
     </bean>
