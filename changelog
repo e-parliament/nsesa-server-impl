@@ -1,3 +1,9 @@
+Release 0.10 (15-October-2013)
+
+- added document content type
+- added initialization procedure change to detect document type
+- added support for bundling amendments
+
 Release 0.4 (26-Jun-2013)
 
 - Corrected persistence of the amendment reference which was not creating a new reference for new versions (resulting in problems when deleting an amendment)
