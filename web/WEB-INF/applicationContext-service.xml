@@ -25,8 +25,8 @@
                 <entry key="14" value="classpath:examples/PE486.060_resolution_v1-00.xml"/>
                 <entry key="template-1" value="classpath:examples/drafting_template.xml"/>
 
-                <entry key="BILLS-112hconres83eh" value="classpath:examples/BILLS-112hconres83eh.txt"/>
-                <entry key="BILLS-112hr4310enr" value="classpath:examples/BILLS-112hr4310enr.txt"/>
+                <!--<entry key="BILLS-112hconres83eh" value="classpath:examples/BILLS-112hconres83eh.txt"/>-->
+                <!--<entry key="BILLS-112hr4310enr" value="classpath:examples/BILLS-112hr4310enr.txt"/>-->
             </map>
         </property>
     </bean>
