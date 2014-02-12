@@ -321,6 +321,13 @@
             </resource>
 
         </resources>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>2.5</version>
+            </extension>
+        </extensions>
         <plugins>
             <!-- ***************************** Configure compiler plugin    ***************************** -->
             <plugin>
@@ -384,6 +391,27 @@
                 <configuration>
                     <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
                 </configuration>
+            </plugin>
+
+            <!-- ***************************** Maven SCP plugin    ***************************** -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <configuration>
+                    <serverid>download.nsesa.org</serverid>
+                    <fromFile>${project.build.directory}/${project.build.finalName}.war</fromFile>
+                    <url>scp://phil@nsesa.org/home/phil/nsesa/www/uploads/${project.build.finalName}/${project.version}</url>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>upload-war-to-server</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>upload-single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
