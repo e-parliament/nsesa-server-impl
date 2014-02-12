@@ -148,6 +148,12 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>15.0</version>
+        </dependency>
+
         <!-- core module: use can you it on its own if you are not using Spring 3 -->
         <dependency>
             <groupId>com.inspire-software.lib.dto.geda</groupId>
@@ -388,50 +394,6 @@
             <properties>
                 <env>dev</env>
             </properties>
-        </profile>
-        <profile>
-            <id>querydsl</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-
-                <dependency>
-                    <groupId>com.mysema.querydsl</groupId>
-                    <artifactId>querydsl-jpa</artifactId>
-                    <version>${querydsl.version}</version>
-                </dependency>
-
-            </dependencies>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.mysema.maven</groupId>
-                        <artifactId>maven-apt-plugin</artifactId>
-                        <version>1.0.4</version>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.mysema.querydsl</groupId>
-                                <artifactId>querydsl-apt</artifactId>
-                                <version>${querydsl.version}</version>
-                            </dependency>
-                        </dependencies>
-                        <executions>
-                            <execution>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>process</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>target/generated-sources/queries</outputDirectory>
-                                    <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 </project>
