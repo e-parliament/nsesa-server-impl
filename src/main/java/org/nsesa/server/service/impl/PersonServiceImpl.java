@@ -1,5 +1,6 @@
 package org.nsesa.server.service.impl;
 
+import com.inspiresoftware.lib.dto.geda.adapter.ValueConverter;
 import com.inspiresoftware.lib.dto.geda.assembler.Assembler;
 import com.inspiresoftware.lib.dto.geda.assembler.DTOAssembler;
 import com.inspiresoftware.lib.dto.geda.assembler.dsl.impl.DefaultDSLRegistry;
@@ -43,6 +44,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     GroupRepository groupRepository;
+
+    @Autowired
+    ValueConverter membershipToGroupConvertor;
 
     @Autowired
     @Qualifier("transactionManager")
@@ -166,6 +170,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     private Map<String, Object> getConvertors() {
-        return new HashMap<String, Object>();
+        return new HashMap<String, Object>() {
+            {
+                put("membershipToGroupConvertor", membershipToGroupConvertor);
+            }
+        };
     }
 }

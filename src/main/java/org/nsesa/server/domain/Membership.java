@@ -57,6 +57,20 @@ public class Membership {
         return result;
     }
 
+    public final boolean isActive() {
+        if (startDate != null) {
+            if (new Date().before(startDate)) {
+                return false;
+            }
+        }
+        if (endDate != null) {
+            if (new Date().after(endDate)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public Long getID() {
         return ID;
     }
