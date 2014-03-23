@@ -5,10 +5,7 @@ import com.inspiresoftware.lib.dto.geda.assembler.Assembler;
 import com.inspiresoftware.lib.dto.geda.assembler.DTOAssembler;
 import com.inspiresoftware.lib.dto.geda.assembler.dsl.impl.DefaultDSLRegistry;
 import org.apache.cxf.annotations.GZIP;
-import org.nsesa.server.domain.AmendableWidgetReference;
-import org.nsesa.server.domain.AmendmentContainer;
-import org.nsesa.server.domain.Document;
-import org.nsesa.server.domain.Person;
+import org.nsesa.server.domain.*;
 import org.nsesa.server.dto.AmendmentContainerDTO;
 import org.nsesa.server.dto.PersonDTO;
 import org.nsesa.server.dto.RevisionDTO;
@@ -75,11 +72,19 @@ public class AmendmentServiceImpl implements AmendmentService {
         if (person != null) {
             final Document document = documentRepository.findByDocumentID(documentID);
             if (document != null) {
+                Set<AmendmentContainer> collapsed = new HashSet<AmendmentContainer>();
+                // finds all that were made by the the current user
                 final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByDocumentAndPersonAndLatestRevision(document, person, true);
+                collapsed.addAll(amendmentContainers);
+                for (final Membership membership : person.getMemberships()) {
+                    final List<AmendmentContainer> amendmentContainersByGroup = amendmentContainerRepository.findByDocumentAndPersonAndLatestRevision(document, membership.getGroup(), true);
+                    collapsed.addAll(amendmentContainersByGroup);
+                }
                 final List<AmendmentContainerDTO> amendmentContainerDTOs = new ArrayList<AmendmentContainerDTO>();
-                amendmentContainerAssembler.assembleDtos(amendmentContainerDTOs, amendmentContainers, getConvertors(), new DefaultDSLRegistry());
+                amendmentContainerAssembler.assembleDtos(amendmentContainerDTOs, collapsed, getConvertors(), new DefaultDSLRegistry());
                 return amendmentContainerDTOs;
             }
+            throw new ResourceNotFoundException("No document with documentID " + documentID + " found.");
         }
         throw new ResourceNotFoundException("No person with personID " + personID + " found.");
     }
