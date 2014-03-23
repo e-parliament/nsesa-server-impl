@@ -157,18 +157,6 @@ public class PersonServiceImpl implements PersonService {
         personRepository.save(person);
     }
 
-    @GET
-    @Path("/groups/{personID}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
-    @Transactional(readOnly = true)
-    @Override
-    public List<GroupDTO> getGroups(@PathParam("personID") String personID) {
-        List<Group> byMembership = groupRepository.findByMembership(personID);
-        List<GroupDTO> groupDTOs = new ArrayList<GroupDTO>();
-        groupAssembler.assembleDtos(groupDTOs, byMembership, getConvertors(), new DefaultDSLRegistry());
-        return groupDTOs;
-    }
-
     private Map<String, Object> getConvertors() {
         return new HashMap<String, Object>() {
             {
