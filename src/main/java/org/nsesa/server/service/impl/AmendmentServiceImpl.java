@@ -66,6 +66,9 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Autowired
     ValueConverter groupConvertor;
 
+    @Autowired
+    ValueConverter membershipToGroupConvertor;
+
     private final Assembler amendmentContainerAssembler = DTOAssembler.newAssembler(AmendmentContainerDTO.class, AmendmentContainer.class);
     private final Assembler personAssembler = DTOAssembler.newAssembler(PersonDTO.class, Person.class);
 
@@ -282,6 +285,7 @@ public class AmendmentServiceImpl implements AmendmentService {
                 put("documentIDConvertor", documentIDConvertor);
                 put("personIDConvertor", personIDConvertor);
                 put("groupConvertor", groupConvertor);
+                put("membershipToGroupConvertor", membershipToGroupConvertor);
                 put("amendableWidgetReferenceConvertor", amendableWidgetReferenceConvertor);
                 put("amendmentActionConvertor", amendmentActionConvertor);
                 put("bundledAmendmentContainerConvertor", bundledAmendmentContainerConvertor);
