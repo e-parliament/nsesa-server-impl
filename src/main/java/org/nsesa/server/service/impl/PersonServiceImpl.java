@@ -123,6 +123,12 @@ public class PersonServiceImpl implements PersonService {
         Person person = personRepository.findByUsername(username);
         if (person == null) {
             person = new Person(UUID.randomUUID().toString(), username, username, "GUEST");
+
+            // add to all the groups
+            Iterable<Group> groups = groupRepository.findAll();
+            for (final Group group : groups) {
+                person.getMemberships().add(new Membership(group, person));
+            }
             personRepository.save(person);
         }
         PersonDTO personDTO = new PersonDTO();

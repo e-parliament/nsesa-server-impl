@@ -14,6 +14,7 @@ import org.nsesa.server.exception.StaleResourceException;
 import org.nsesa.server.exception.ValidationException;
 import org.nsesa.server.repository.AmendmentContainerRepository;
 import org.nsesa.server.repository.DocumentRepository;
+import org.nsesa.server.repository.GroupRepository;
 import org.nsesa.server.repository.PersonRepository;
 import org.nsesa.server.service.api.AmendmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,9 @@ public class AmendmentServiceImpl implements AmendmentService {
     AmendmentContainerRepository amendmentContainerRepository;
 
     @Autowired
+    GroupRepository groupRepository;
+
+    @Autowired
     ValueConverter documentIDConvertor;
 
     @Autowired
@@ -58,6 +62,9 @@ public class AmendmentServiceImpl implements AmendmentService {
 
     @Autowired
     ValueConverter bundledAmendmentContainerConvertor;
+
+    @Autowired
+    ValueConverter groupConvertor;
 
     private final Assembler amendmentContainerAssembler = DTOAssembler.newAssembler(AmendmentContainerDTO.class, AmendmentContainer.class);
     private final Assembler personAssembler = DTOAssembler.newAssembler(PersonDTO.class, Person.class);
@@ -133,6 +140,39 @@ public class AmendmentServiceImpl implements AmendmentService {
             return amendmentContainerDTO;
         }
         throw new ResourceNotFoundException("No amendment with revision " + revisionID + " found.");
+    }
+
+    @POST
+    @Path("/share/{amendmentContainerID}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional()
+    @Override
+    public AmendmentContainerDTO share(@PathParam("amendmentContainerID") String amendmentContainerID, @QueryParam("groupID") String groupID, @QueryParam("share") Boolean share) throws ResourceNotFoundException {
+
+        final AmendmentContainerDTO amendmentContainerDTO = new AmendmentContainerDTO();
+        final AmendmentContainer amendmentContainer = amendmentContainerRepository.findByAmendmentContainerIDAndLatestRevision(amendmentContainerID, true);
+        if (amendmentContainer != null) {
+
+            if (share) {
+                Group group = groupRepository.findByGroupID(groupID);
+                if (group != null) {
+                    amendmentContainer.getGroups().add(group);
+                }
+            }
+            else {
+                Iterator<Group> iterator = amendmentContainer.getGroups().iterator();
+                while (iterator.hasNext()) {
+                    Group group = iterator.next();
+                    if (group.getGroupID().equals(groupID)) {
+                        iterator.remove();
+                    }
+                }
+            }
+            amendmentContainerRepository.save(amendmentContainer);
+            amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
+            return amendmentContainerDTO;
+        }
+        throw new ResourceNotFoundException("No amendment with amendmentContainerID " + amendmentContainerID + " found.");
     }
 
     @GET
@@ -241,6 +281,7 @@ public class AmendmentServiceImpl implements AmendmentService {
             {
                 put("documentIDConvertor", documentIDConvertor);
                 put("personIDConvertor", personIDConvertor);
+                put("groupConvertor", groupConvertor);
                 put("amendableWidgetReferenceConvertor", amendableWidgetReferenceConvertor);
                 put("amendmentActionConvertor", amendmentActionConvertor);
                 put("bundledAmendmentContainerConvertor", bundledAmendmentContainerConvertor);
