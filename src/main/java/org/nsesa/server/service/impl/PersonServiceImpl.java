@@ -68,8 +68,6 @@ public class PersonServiceImpl implements PersonService {
                 everyone.setGroupID(UUID.randomUUID().toString());
                 groupRepository.save(everyone);
 
-                final Random r = new Random(102381931414l);
-
                 for (int i = 1; i < 11; i++) {
                     Person byUsername = personRepository.findByUsername("mp" + i);
                     if (byUsername == null) {
