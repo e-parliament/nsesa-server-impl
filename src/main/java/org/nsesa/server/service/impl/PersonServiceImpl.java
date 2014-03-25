@@ -62,17 +62,11 @@ public class PersonServiceImpl implements PersonService {
         tmpl.execute(new TransactionCallbackWithoutResult() {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus status) {
-                final Group groupA = new Group();
-                groupA.setName("Group A");
-                groupA.setDescription("Group A");
-                groupA.setGroupID("groupA");
-                groupRepository.save(groupA);
-
-                final Group groupB = new Group();
-                groupB.setName("Group B");
-                groupB.setDescription("Group B");
-                groupB.setGroupID("groupB");
-                groupRepository.save(groupB);
+                final Group everyone = new Group();
+                everyone.setName("Everyone");
+                everyone.setDescription("Everyone.");
+                everyone.setGroupID(UUID.randomUUID().toString());
+                groupRepository.save(everyone);
 
                 final Random r = new Random(102381931414l);
 
@@ -81,14 +75,10 @@ public class PersonServiceImpl implements PersonService {
                     if (byUsername == null) {
                         byUsername = new Person("personID" + i, "mp" + i, "MP " + i, "MP");
 
-                        if (r.nextBoolean()) {
-                            Membership membership = new Membership(groupA, byUsername);
-                            byUsername.getMemberships().add(membership);
-                        }
-                        if (r.nextBoolean()) {
-                            Membership membership = new Membership(groupB, byUsername);
-                            byUsername.getMemberships().add(membership);
-                        }
+                        // make everyone a member of the public group
+                        Membership membership = new Membership(everyone, byUsername);
+                        byUsername.getMemberships().add(membership);
+
                         personRepository.save(byUsername);
                     }
                 }
