@@ -1,5 +1,6 @@
 package org.nsesa.server.service.impl;
 
+import com.google.common.collect.Lists;
 import com.inspiresoftware.lib.dto.geda.adapter.ValueConverter;
 import com.inspiresoftware.lib.dto.geda.assembler.Assembler;
 import com.inspiresoftware.lib.dto.geda.assembler.DTOAssembler;
@@ -15,6 +16,7 @@ import org.nsesa.server.repository.PersonRepository;
 import org.nsesa.server.service.api.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -149,6 +151,18 @@ public class PersonServiceImpl implements PersonService {
         Person person = new Person();
         personAssembler.assembleEntity(personDTO, person, getConvertors(), new DefaultDSLRegistry());
         personRepository.save(person);
+    }
+
+    @GET
+    @Path("/all")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional()
+    @Override
+    public List<PersonDTO> list(@DefaultValue("0") @QueryParam("offset") int offset, @DefaultValue("5") @QueryParam("rows") int rows) {
+        List<org.nsesa.server.dto.PersonDTO> personDTOs = new ArrayList<org.nsesa.server.dto.PersonDTO>();
+        final Page<Person> persons = personRepository.findAll(new PageRequest(offset, rows));
+        personAssembler.assembleDtos(personDTOs, persons.getContent(), getConvertors(), new DefaultDSLRegistry());
+        return personDTOs;
     }
 
     private Map<String, Object> getConvertors() {
