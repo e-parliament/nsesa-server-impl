@@ -1,9 +1,7 @@
 package org.nsesa.server.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * Date: 12/03/13 11:53
@@ -37,6 +35,9 @@ public class AmendmentContainer {
 
     @ManyToOne(optional = false)
     private Person person;
+
+    @ManyToMany
+    private Set<Group> groups = new HashSet<Group>();
 
     /**
      * Flag to keep track of the latest revision - significantly speeds up certain operations.
@@ -280,5 +281,13 @@ public class AmendmentContainer {
 
     public void setBundledAmendmentContainers(List<String> bundledAmendmentContainers) {
         this.bundledAmendmentContainers = bundledAmendmentContainers;
+    }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 }

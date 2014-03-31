@@ -5,10 +5,7 @@ import com.inspiresoftware.lib.dto.geda.assembler.Assembler;
 import com.inspiresoftware.lib.dto.geda.assembler.DTOAssembler;
 import com.inspiresoftware.lib.dto.geda.assembler.dsl.impl.DefaultDSLRegistry;
 import org.apache.cxf.annotations.GZIP;
-import org.nsesa.server.domain.AmendableWidgetReference;
-import org.nsesa.server.domain.AmendmentContainer;
-import org.nsesa.server.domain.Document;
-import org.nsesa.server.domain.Person;
+import org.nsesa.server.domain.*;
 import org.nsesa.server.dto.AmendmentContainerDTO;
 import org.nsesa.server.dto.PersonDTO;
 import org.nsesa.server.dto.RevisionDTO;
@@ -17,6 +14,7 @@ import org.nsesa.server.exception.StaleResourceException;
 import org.nsesa.server.exception.ValidationException;
 import org.nsesa.server.repository.AmendmentContainerRepository;
 import org.nsesa.server.repository.DocumentRepository;
+import org.nsesa.server.repository.GroupRepository;
 import org.nsesa.server.repository.PersonRepository;
 import org.nsesa.server.service.api.AmendmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +46,9 @@ public class AmendmentServiceImpl implements AmendmentService {
     AmendmentContainerRepository amendmentContainerRepository;
 
     @Autowired
+    GroupRepository groupRepository;
+
+    @Autowired
     ValueConverter documentIDConvertor;
 
     @Autowired
@@ -62,6 +63,12 @@ public class AmendmentServiceImpl implements AmendmentService {
     @Autowired
     ValueConverter bundledAmendmentContainerConvertor;
 
+    @Autowired
+    ValueConverter groupConvertor;
+
+    @Autowired
+    ValueConverter membershipToGroupConvertor;
+
     private final Assembler amendmentContainerAssembler = DTOAssembler.newAssembler(AmendmentContainerDTO.class, AmendmentContainer.class);
     private final Assembler personAssembler = DTOAssembler.newAssembler(PersonDTO.class, Person.class);
 
@@ -75,11 +82,19 @@ public class AmendmentServiceImpl implements AmendmentService {
         if (person != null) {
             final Document document = documentRepository.findByDocumentID(documentID);
             if (document != null) {
+                Set<AmendmentContainer> collapsed = new HashSet<AmendmentContainer>();
+                // finds all that were made by the the current user
                 final List<AmendmentContainer> amendmentContainers = amendmentContainerRepository.findByDocumentAndPersonAndLatestRevision(document, person, true);
+                collapsed.addAll(amendmentContainers);
+                for (final Membership membership : person.getMemberships()) {
+                    final List<AmendmentContainer> amendmentContainersByGroup = amendmentContainerRepository.findByDocumentAndPersonAndLatestRevision(document, membership.getGroup(), true);
+                    collapsed.addAll(amendmentContainersByGroup);
+                }
                 final List<AmendmentContainerDTO> amendmentContainerDTOs = new ArrayList<AmendmentContainerDTO>();
-                amendmentContainerAssembler.assembleDtos(amendmentContainerDTOs, amendmentContainers, getConvertors(), new DefaultDSLRegistry());
+                amendmentContainerAssembler.assembleDtos(amendmentContainerDTOs, collapsed, getConvertors(), new DefaultDSLRegistry());
                 return amendmentContainerDTOs;
             }
+            throw new ResourceNotFoundException("No document with documentID " + documentID + " found.");
         }
         throw new ResourceNotFoundException("No person with personID " + personID + " found.");
     }
@@ -128,6 +143,39 @@ public class AmendmentServiceImpl implements AmendmentService {
             return amendmentContainerDTO;
         }
         throw new ResourceNotFoundException("No amendment with revision " + revisionID + " found.");
+    }
+
+    @POST
+    @Path("/share/{amendmentContainerID}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+    @Transactional()
+    @Override
+    public AmendmentContainerDTO share(@PathParam("amendmentContainerID") String amendmentContainerID, @QueryParam("groupID") String groupID, @QueryParam("share") Boolean share) throws ResourceNotFoundException {
+
+        final AmendmentContainerDTO amendmentContainerDTO = new AmendmentContainerDTO();
+        final AmendmentContainer amendmentContainer = amendmentContainerRepository.findByAmendmentContainerIDAndLatestRevision(amendmentContainerID, true);
+        if (amendmentContainer != null) {
+
+            if (share) {
+                Group group = groupRepository.findByGroupID(groupID);
+                if (group != null) {
+                    amendmentContainer.getGroups().add(group);
+                }
+            }
+            else {
+                Iterator<Group> iterator = amendmentContainer.getGroups().iterator();
+                while (iterator.hasNext()) {
+                    Group group = iterator.next();
+                    if (group.getGroupID().equals(groupID)) {
+                        iterator.remove();
+                    }
+                }
+            }
+            amendmentContainerRepository.save(amendmentContainer);
+            amendmentContainerAssembler.assembleDto(amendmentContainerDTO, amendmentContainer, getConvertors(), new DefaultDSLRegistry());
+            return amendmentContainerDTO;
+        }
+        throw new ResourceNotFoundException("No amendment with amendmentContainerID " + amendmentContainerID + " found.");
     }
 
     @GET
@@ -236,6 +284,8 @@ public class AmendmentServiceImpl implements AmendmentService {
             {
                 put("documentIDConvertor", documentIDConvertor);
                 put("personIDConvertor", personIDConvertor);
+                put("groupConvertor", groupConvertor);
+                put("membershipToGroupConvertor", membershipToGroupConvertor);
                 put("amendableWidgetReferenceConvertor", amendableWidgetReferenceConvertor);
                 put("amendmentActionConvertor", amendmentActionConvertor);
                 put("bundledAmendmentContainerConvertor", bundledAmendmentContainerConvertor);

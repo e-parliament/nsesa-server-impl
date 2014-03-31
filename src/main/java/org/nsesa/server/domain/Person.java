@@ -1,6 +1,8 @@
 package org.nsesa.server.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Date: 12/03/13 11:53
@@ -36,6 +38,9 @@ public class Person {
      */
     @Column(nullable = false, length = 64)
     private String lastName;
+
+    @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL)
+    private Set<Membership> memberships = new HashSet<Membership>();
 
     public Person() {
     }
@@ -119,6 +124,14 @@ public class Person {
 
     public void setPersonID(String personID) {
         this.personID = personID;
+    }
+
+    public Set<Membership> getMemberships() {
+        return memberships;
+    }
+
+    public void setMemberships(Set<Membership> memberships) {
+        this.memberships = memberships;
     }
 
     @Override
