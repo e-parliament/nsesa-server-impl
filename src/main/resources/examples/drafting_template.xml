@@ -79,7 +79,9 @@
                 <num>
                     <i>Article 1</i>
                 </num>
+                <heading><b>{Article Heading}</b></heading>
                 <paragraph id="_2012744_0672">
+                    <num></num>
                     <content id="_2012744_0673">
                         <p>{paragraph}</p>
                     </content>
