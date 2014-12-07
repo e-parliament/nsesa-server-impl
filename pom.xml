@@ -8,7 +8,7 @@
     <artifactId>server-demo-impl</artifactId>
     <packaging>war</packaging>
     <name>Server Impl</name>
-    <version>0.7-SNAPSHOT</version>
+    <version>0.7</version>
 
     <repositories>
         <repository>
@@ -35,7 +35,7 @@
 
     <properties>
         <gwt.version>2.5.0</gwt.version>
-        <spring.version>3.2.6.RELEASE</spring.version>
+        <spring.version>3.2.12.RELEASE</spring.version>
         <spring-security.version>3.2.0.RELEASE</spring-security.version>
         <gwtplugin.version>2.5.0</gwtplugin.version>
         <querydsl.version>2.9.0</querydsl.version>
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>org.nsesa</groupId>
             <artifactId>nsesa-server-api</artifactId>
-            <version>0.7-SNAPSHOT</version>
+            <version>0.7</version>
         </dependency>
 
         <!--Spring-->
