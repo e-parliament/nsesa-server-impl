@@ -35,7 +35,7 @@
             </container>
             <container name="mainDoc" id="_2012744_0002">
                 <p>
-                    <docTitle id="_2012744_0003" class="nsesa-inline">
+                    <docTitle id="_2012744_0003">
                         <docStage>{docStage}</docStage>
                         for
                         a
@@ -56,7 +56,7 @@
                 <p>THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION,</p>
             </formula>
             <citations id="_2012744_0005">
-                <citation id="_2012744_0006" class="nsesa-inline">
+                <citation id="_2012744_0006">
                     <p>{citation}
                     </p>
                 </citation>
@@ -65,7 +65,7 @@
                 <intro id="_2012744_0015">
                     <p>Whereas:</p>
                 </intro>
-                <recital id="_2012744_0016" class="nsesa-inline">
+                <recital id="_2012744_0016">
                     <num>(1)</num>
                     <p>{recital}</p>
                 </recital>
@@ -79,7 +79,9 @@
                 <num>
                     <i>Article 1</i>
                 </num>
-                <paragraph id="_2012744_0672" class="nsesa-inline">
+                <heading><b>{Article Heading}</b></heading>
+                <paragraph id="_2012744_0672">
+                    <num></num>
                     <content id="_2012744_0673">
                         <p>{paragraph}</p>
                     </content>
