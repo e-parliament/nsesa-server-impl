@@ -25,7 +25,7 @@ public class DocumentContent {
     /**
      * XML content.
      */
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String content;
 
     @Enumerated(value = EnumType.STRING)
