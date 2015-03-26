@@ -79,7 +79,7 @@ public class AmendmentContainer {
     /**
      * The serialized body/payload of this amendment. Can be XML or JSON, depending on what your backend provides.
      */
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String body;
 
     /**
