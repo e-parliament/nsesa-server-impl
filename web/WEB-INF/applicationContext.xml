@@ -18,13 +18,16 @@
              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Configure the properties via placeholders. We will first read the properties file on the classpath,
-        which can be overridden via another properties file in the local home directory. -->
+    which can be overridden via another properties file in the local home directory and finally by setting
+    the java parameter/environment variable NSESA_SERVER_PROPERTIES to a path
+    such as /any/path/nsesa-server.properties. -->
     <bean id="propertyConfigurer"
           class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:nsesa-server.properties</value>
                 <value>file:///${user.home}/nsesa-server.properties</value>
+                <value>file://#{ systemProperties['NSESA_SERVER_PROPERTIES'] }</value>
             </list>
         </property>
         <property name="ignoreUnresolvablePlaceholders" value="false"/>
